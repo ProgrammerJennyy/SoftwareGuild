@@ -26,30 +26,30 @@ public class DogGenetics {
                 + dogsName + "'s prestigious background right here.");
         System.out.println(dogsName + " is:");
 
-        int percentleft = 100;
-        if (percentleft > 0) {
-            int perbreed = randNumber.nextInt(percentleft) ;
+        int percentLeft = 100;
+        if (percentLeft > 0) {
+            int perbreed = randNumber.nextInt(percentLeft) ;
             System.out.println(perbreed + "% St. Bernard");
-            percentleft -= perbreed;
+            percentLeft -= perbreed;
         }
 
-        if (percentleft > 0) {
-            int perbreed = randNumber.nextInt(percentleft) ;
+        if (percentLeft > 0) {
+            int perbreed = randNumber.nextInt(percentLeft) ;
             System.out.println(perbreed + "% Chihuahua");
-            percentleft -= perbreed;
+            percentLeft -= perbreed;
         }
-        if (percentleft > 0) {
-            int perbreed = randNumber.nextInt(percentleft) ;
+        if (percentLeft > 0) {
+            int perbreed = randNumber.nextInt(percentLeft) ;
             System.out.println(perbreed + "% Dramatic RedNosed Asian Pug");
-            percentleft -= perbreed;
+            percentLeft -= perbreed;
         }
-        if (percentleft > 0) {
-            int perbreed = randNumber.nextInt(percentleft) ;
+        if (percentLeft > 0) {
+            int perbreed = randNumber.nextInt(percentLeft) ;
             System.out.println(perbreed + "% Common Cur");
-            percentleft -= perbreed;
+            percentLeft -= perbreed;
         }
-        if (percentleft > 0) {
-            System.out.println(percentleft + "% King Doberman");
+        if (percentLeft > 0) {
+            System.out.println(percentLeft + "% King Doberman");
         }        
         System.out.println("Wow, that's QUITE the dog!    ");
         
