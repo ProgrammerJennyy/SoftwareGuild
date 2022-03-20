@@ -17,7 +17,6 @@ public class DogGenetics {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
         Scanner input = new Scanner(System.in);
         Random randNumber = new Random();
         System.out.println("What is your dog's name?");
@@ -26,7 +25,7 @@ public class DogGenetics {
                 + dogsName + "'s prestigious background right here.");
         System.out.println(dogsName + " is:");
 
-  int range=101;
+        int range=101;
         int bernard =randNumber.nextInt(range);
         double sumTotal = bernard;
         int chihuahua =randNumber.nextInt(range);
