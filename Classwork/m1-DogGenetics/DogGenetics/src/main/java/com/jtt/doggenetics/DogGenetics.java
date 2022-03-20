@@ -26,34 +26,33 @@ public class DogGenetics {
                 + dogsName + "'s prestigious background right here.");
         System.out.println(dogsName + " is:");
 
-        int percentLeft = 100;
-        if (percentLeft > 0) {
-            int perBreed = randNumber.nextInt(percentLeft) ;
-            System.out.println(perBreed + "% St. Bernard");
-            percentLeft -= perBreed;
-        }
+  int range=101;
+        int bernard =randNumber.nextInt(range);
+        double sumTotal = bernard;
+        int chihuahua =randNumber.nextInt(range);
+        sumTotal += chihuahua;
+        int pug =randNumber.nextInt(range);
+        sumTotal += pug;
+        int cur =randNumber.nextInt(range);
+        sumTotal += cur;
+        int doberman =randNumber.nextInt(range);
+        sumTotal += doberman;
 
-        if (percentLeft > 0) {
-            int perBreed = randNumber.nextInt(percentLeft) ;
-            System.out.println(perBreed + "% Chihuahua");
-            percentLeft -= perBreed;
-        }
-        if (percentLeft > 0) {
-            int perBreed = randNumber.nextInt(percentLeft) ;
-            System.out.println(perBreed + "% Dramatic RedNosed Asian Pug");
-            percentLeft -= perBreed;
-        }
-        if (percentLeft > 0) {
-            int perBreed = randNumber.nextInt(percentLeft) ;
-            System.out.println(perBreed + "% Common Cur");
-            percentLeft -= perBreed;
-        }
-        if (percentLeft > 0) {
-            System.out.println(percentLeft + "% King Doberman");
-        }        
+        System.out.println((int)(bernard/sumTotal*100) + "% St. Bernard");
+        System.out.println((int)(chihuahua/sumTotal*100) + "% Chihuahua");
+        System.out.println((int)(pug/sumTotal*100) + "% Dramatic RedNosed Asian Pug");
+        System.out.println((int)(cur/(double)sumTotal*100) + "% Common Cur");
+        doberman = 100   // handle integer rounding.
+                - (int)(bernard/sumTotal*100)
+                - (int)(chihuahua/sumTotal*100)
+                - (int)(pug/sumTotal*100)
+                - (int)(cur/sumTotal*100) ;
+        System.out.println(doberman + "% King Doberman");
         System.out.println("Wow, that's QUITE the dog!    ");
+        }        
+       
         
         
     }
 
-}
+
