@@ -40,7 +40,7 @@ public class DogGenetics {
         System.out.println((int)(bernard/sumTotal*100) + "% St. Bernard");
         System.out.println((int)(chihuahua/sumTotal*100) + "% Chihuahua");
         System.out.println((int)(pug/sumTotal*100) + "% Dramatic RedNosed Asian Pug");
-        System.out.println((int)(cur/(double)sumTotal*100) + "% Common Cur");
+        System.out.println((int)(cur/sumTotal*100) + "% Common Cur");
         doberman = 100   // handle integer rounding.
                 - (int)(bernard/sumTotal*100)
                 - (int)(chihuahua/sumTotal*100)
