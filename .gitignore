@@ -441,8 +441,14 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+<<<<<<< HEAD
 /Classwork/m1-rockPaperScissors/RockPaperScissors/target/
 /Classwork/m1-DogGenetics/DogGenetics/target/
 /Classwork/m1-healthyHeart/mavenproject1/target/
 /Classwork/m1-SumArrays/SummativeSums/target/
 /Classwork/m1-healthyHeart/HealthyHeart/target/
+=======
+
+*.lst
+*.netbeans_automatic_build
+>>>>>>> m1-summative
