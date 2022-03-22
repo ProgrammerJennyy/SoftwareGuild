@@ -441,3 +441,6 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+
+*.lst
+*.netbeans_automatic_build
