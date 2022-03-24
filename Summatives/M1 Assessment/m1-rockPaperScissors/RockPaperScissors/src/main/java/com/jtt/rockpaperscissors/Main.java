@@ -15,7 +15,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        /*
+        /* 
             Get number of games 
          */
         Scanner input = new Scanner(System.in);
@@ -25,33 +25,36 @@ public class Main {
         int numComputerWins = 0;
         int numHumanWins = 0;
         int ties = 0;
-        try {
+        int choice = 0;
+        String playAgain = "N";
+        do { // play again loop
+
             System.out.println("Welcome to Rock Paper Scissors.");
             System.out.println("How Many games do you want to play 1-10:");
             String numGamesStr = input.nextLine();
             numGames = Integer.parseInt(numGamesStr);
             if (numGames < 1 || numGames > 10) {
-                throw new Exception();
+                System.out.println("Invalid number of games.  Exiting Program.");
+                break; // break out of do while loop and exit.
             }
-        } catch (Exception x) {
-            System.out.println("invalid input.  Exiting Program.");
-            return;
-        }
-
-        for (int i = 0; i < numGames; i++) {
-            try {  // Start Game
+            ties = 0;
+            numComputerWins = 0;
+            numHumanWins = 0;
+            for (int i = 0; i < numGames; i++) {
                 // Get user input
                 System.out.println("***************************");
                 System.out.println("1 Rock");
                 System.out.println("2 Paper");
                 System.out.println("3 Scissors");
                 System.out.println("***************************");
-                System.out.println("Enter Choice 1-3:");
-                String choiceStr = input.nextLine();
-                int choice = Integer.parseInt(choiceStr);
-                if (choice < 1 || choice > 3) {
-                    throw new Exception();
-                }
+                do { // human choice validation loop
+                    System.out.println("Enter Choice 1-3:");
+                    String choiceStr = input.nextLine();
+                    choice = Integer.parseInt(choiceStr);
+                    if (choice < 1 || choice > 3) {
+                        System.out.println("Invalid choice try again.");
+                    }
+                } while (choice < 1 || choice > 3);
                 int compChoice = randNumber.nextInt(3) + 1;
                 switch (compChoice) {
                     case 1: // rock
@@ -69,7 +72,7 @@ public class Main {
                         break;
                     case 2:  // paper
                         System.out.println(" Computer picks 2 Paper");
-                         if (choice == 2) {
+                        if (choice == 2) {
                             ties++;
                             System.out.println("Game is a tie");
                         } else if (choice == 3) {
@@ -78,11 +81,11 @@ public class Main {
                         } else {
                             numComputerWins++;
                             System.out.println("Computer wins");
-                        }                       
+                        }
                         break;
                     case 3:  // scissors
                         System.out.println(" Computer picks 3 Scissors");
-                          if (choice == 3) {
+                        if (choice == 3) {
                             ties++;
                             System.out.println("Game is a tie");
                         } else if (choice == 1) {
@@ -91,20 +94,30 @@ public class Main {
                         } else {
                             numComputerWins++;
                             System.out.println("Computer wins");
-                        }                           
+                        }
                         break;
                     default:
                 } // switch
 
+            } // end for
+            System.out.println("========== Summary ==================");
+            System.out.println("Computer won " + numComputerWins + " times.");
+            System.out.println("Human won " + numHumanWins + " times.");
+            System.out.println("A tie occured " + ties + " times.");
+            if (numComputerWins > numHumanWins) {
+                System.out.println("The overall winner is computer.");
 
-        }// end try
-        catch (Exception x) {
-                System.out.println("invalid input.");
-                i--; // dont increment game.
+            } else if (numComputerWins < numHumanWins) {
+                System.out.println("The overall winner is human.");
+
+            } else {
+                System.out.println("The overall winner is nobody.");
             }
-    } // end for
-        System.out.println("Computer won "+ numComputerWins +" times.");
-        System.out.println("Human won "+ numHumanWins +" times.");
+            System.out.println("=====================================");
 
+            System.out.println("Do you want to play again?(Y/N):");
+            playAgain = input.nextLine();
+        } while (playAgain.equalsIgnoreCase("Y") || playAgain.equalsIgnoreCase("Yes"));
+        System.out.println("Thanks for playing!");
     } // end main
 } // end class
