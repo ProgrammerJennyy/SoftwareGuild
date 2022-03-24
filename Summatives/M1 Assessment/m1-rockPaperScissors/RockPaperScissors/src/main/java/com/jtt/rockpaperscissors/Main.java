@@ -20,6 +20,7 @@ public class Main {
          */
         Scanner input = new Scanner(System.in);
         Random randNumber = new Random();
+        //classes 
 
         int numGames = 0;
         int numComputerWins = 0;
@@ -27,21 +28,27 @@ public class Main {
         int ties = 0;
         int choice = 0;
         String playAgain = "N";
-        do { // play again loop
+        do { // play again- do while loop - conditional check is at the end, will run atleast once 
 
             System.out.println("Welcome to Rock Paper Scissors.");
             System.out.println("How Many games do you want to play 1-10:");
             String numGamesStr = input.nextLine();
+
             numGames = Integer.parseInt(numGamesStr);
+
             if (numGames < 1 || numGames > 10) {
+                //if conditional statement 
                 System.out.println("Invalid number of games.  Exiting Program.");
                 break; // break out of do while loop and exit.
-            }
+            } //clear variables before each game 
             ties = 0;
             numComputerWins = 0;
             numHumanWins = 0;
             for (int i = 0; i < numGames; i++) {
                 // Get user input
+                //for loop 
+                // i counter for number of games 
+
                 System.out.println("***************************");
                 System.out.println("1 Rock");
                 System.out.println("2 Paper");
@@ -50,13 +57,17 @@ public class Main {
                 do { // human choice validation loop
                     System.out.println("Enter Choice 1-3:");
                     String choiceStr = input.nextLine();
+
                     choice = Integer.parseInt(choiceStr);
+
                     if (choice < 1 || choice > 3) {
                         System.out.println("Invalid choice try again.");
                     }
                 } while (choice < 1 || choice > 3);
                 int compChoice = randNumber.nextInt(3) + 1;
                 switch (compChoice) {
+                    // switch is like a if else statement
+                    // compChoice is a variable 
                     case 1: // rock
                         System.out.println(" Computer picks 1 Rock");
                         if (choice == 1) {
