@@ -4,10 +4,75 @@
  */
 package com.jtt.flooringmastery.dao;
 
+import com.jtt.flooringmastery.dto.ProductDTO;
+import java.io.File;
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Scanner;
+
 /**
  *
  * @author Jenny
  */
 public class ProductDAO {
-    
-}
+
+    private ArrayList<ProductDTO> m_list;
+    private String m_Products="";
+
+    public ProductDAO() {
+        m_list = new ArrayList<ProductDTO>();
+    }
+
+    public void LoadFile(String filename, String delimeter) {
+        try {
+            File myfile = new File(filename);
+            Scanner readFile = new Scanner(myfile);
+            int counter = 0;
+            while (readFile.hasNextLine()) {
+                ProductDTO data = new ProductDTO();
+                String row;
+                row = readFile.nextLine();
+                String temp[] = row.split(delimeter);
+                if (counter > 0) { // Dont add header to listarray
+                    data.setM_ProductType(temp[0]);
+                    BigDecimal num = new BigDecimal(temp[1]);
+                    data.setM_CostPerSquareFoot(num);
+                    BigDecimal labor = new BigDecimal(temp[2]);
+                    data.setM_LaborCostPerSquareFoot(labor);
+                    m_list.add(data);
+                    m_Products += counter + ": ";
+                }
+                m_Products += temp[0] + " \t" + temp[1] + " \t" + temp[2] + "\n";
+                counter = counter + 1;
+            }
+            readFile.close();
+        } // end try // end try
+        catch (Exception x) {
+            System.out.println("caught exception in productdto fileload ");
+        }
+    }   // end load
+
+    public String getProductInfo() {
+        return m_Products;
+    }
+
+    public BigDecimal getCostPerSquareFoot(int item) {
+        BigDecimal retval = new BigDecimal(-1.0);
+        if (item > m_list.size()) {
+            ProductDTO temp = m_list.get(item - 1);
+            retval = temp.getM_CostPerSquareFoot();
+        }
+        return retval;
+    }
+
+    public BigDecimal getLaborCostPerSquareFoot(int item) {
+        BigDecimal retval = new BigDecimal(-1.0);
+        if (item > m_list.size()) {
+            ProductDTO temp = m_list.get(item - 1);
+            retval = temp.getM_LaborCostPerSquareFoot();
+        }
+        return retval;
+    }
+
+} // end class
+

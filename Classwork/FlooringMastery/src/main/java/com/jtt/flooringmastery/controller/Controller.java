@@ -20,7 +20,12 @@ public class Controller {
         this.m_view=vw;
         this.m_service=srvc;
     }
+    public void Initialize()
+    {
+        m_service.Initialize();
+    }
     public void run() {
+        Initialize();
         int choice=0;
         do{
             m_view.ShowMenu();

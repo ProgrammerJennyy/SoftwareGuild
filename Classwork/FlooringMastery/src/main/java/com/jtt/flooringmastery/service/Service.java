@@ -16,7 +16,7 @@ public interface Service {
    public void Display();
     public void Add();
         
-    
+    public void Initialize();
     public void Edit();    
     
     public void Remove();    

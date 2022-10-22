@@ -36,5 +36,11 @@ public class ServiceImpl implements Service {
     {
         
     } 
-    
+    public void Initialize()
+    {
+        String filenameprod="Data\\Products.txt";
+        this.m_prod.LoadFile(filenameprod, ",");
+        String filenametaxes="Data\\Taxes.txt";
+        this.m_taxes.LoadFile(filenametaxes, ",");
+    }
 }
