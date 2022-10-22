@@ -19,13 +19,14 @@ public class UserIOConsoleImpl implements UserIO {
         do {
             System.out.println("Enter integer selection: ");
             try {
-                m_input = myInput.nextInt();
+                String X = myInput.nextLine();
+                m_input = Integer.parseInt(X);
+
             } catch (Exception e) {
                 m_input = 0;
                 System.out.println("enter correct data please  ");
-                continue;
             }
-        } while (ValidateInput() == false);
+        } while (m_input == 0 || ValidateInput() == false);
         return m_input;
     }
 
