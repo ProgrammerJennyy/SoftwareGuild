@@ -9,16 +9,28 @@ package com.jtt.flooringmastery.view;
  * @author Jenny
  */
 public class view {
+
     private UserIO m_userio;
-    public view(UserIO val)
-    {
-        this.m_userio=val;
+
+    public view(UserIO val) {
+        this.m_userio = val;
     }
-    public void ShowMenu()
-    {
-        
+
+    public void ShowMenu() {
+   System.out.println(
+   "   * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *\n"    
+   +"* <<Flooring Program>>\n"
+   +"* 1. Display Orders\n"
+   +"* 2. Add an Order\n"
+   +"* 3. Edit an Order\n"
+   +"* 4. Remove an Order\n"
+   +"* 5. Export All Data(unavailable)\n"
+   +"* 6. Quit\n"
+   +"*\n"
+   +"* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * \n"
+    );        
     }
-    public char GetSelection(){
-        return '1';
+    public Integer GetSelection() {
+       return m_userio.GetInput();
     }
 }

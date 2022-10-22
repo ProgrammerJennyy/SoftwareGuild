@@ -8,6 +8,6 @@ package com.jtt.flooringmastery.dao;
  *
  * @author Jenny
  */
-public interface TaxesDAO {
+public class TaxesDAO {
     
 }

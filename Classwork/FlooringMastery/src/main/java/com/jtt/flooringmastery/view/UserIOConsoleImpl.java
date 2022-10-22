@@ -4,16 +4,38 @@
  */
 package com.jtt.flooringmastery.view;
 
+import java.util.Scanner;
+
 /**
  *
  * @author Jenny
  */
 public class UserIOConsoleImpl implements UserIO {
-    public int GetInput()
-    {
-        return 0;
+
+    Scanner myInput = new Scanner(System.in);
+    private int m_input;
+
+    public int GetInput() {
+        do {
+            System.out.println("Enter integer selection: ");
+            try {
+                m_input = myInput.nextInt();
+            } catch (Exception e) {
+                m_input = 0;
+                System.out.println("enter correct data please  ");
+                continue;
+            }
+        } while (ValidateInput() == false);
+        return m_input;
     }
-    public boolean ValidateInput(){
-        return true;
-    }    
-}
+
+    public boolean ValidateInput() {
+        if (m_input > 0 && m_input < 7) {
+            return true;
+        } else {
+            System.out.println("enter correct data please  ");
+            return false;
+
+        }
+    }  // end validate   
+} // end class 

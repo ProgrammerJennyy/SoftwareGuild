@@ -18,7 +18,7 @@
     <!-- Bean definitions go here -->
    <bean id="userIO" class="com.jtt.flooringmastery.view.UserIOConsoleImpl"/>
    
-    <bean id="view" class="com.jtt.flooringmastery.view.view">
+    <bean id="theview" class="com.jtt.flooringmastery.view.view">
         <constructor-arg ref="userIO"/>
     </bean>
     <bean id="orderdao" class="com.jtt.flooringmastery.dao.OrderDAO"/>
@@ -35,7 +35,7 @@
    
     <bean id="controller" 
          class="com.jtt.flooringmastery.controller.Controller">
-        <constructor-arg ref="view"/>
+        <constructor-arg ref="theview"/>
         <constructor-arg ref="serviceLayer"/>
     </bean>   
 </beans>
