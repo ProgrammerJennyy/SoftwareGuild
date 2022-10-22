@@ -24,6 +24,8 @@ public class ServiceImpl implements Service {
       }
     public void Display()
     {
+        String filenameprod="Orders\\Orders_06022013.txt";
+        this.m_order.LoadFile(filenameprod, ",");
         
     }
     public void Add(){
@@ -38,6 +40,8 @@ public class ServiceImpl implements Service {
     } 
     public void Initialize()
     {
+        String filenameorder="Orders\\Orders_06022013.txt";
+        this.m_order.LoadFile(filenameorder, ",");        
         String filenameprod="Data\\Products.txt";
         this.m_prod.LoadFile(filenameprod, ",");
         String filenametaxes="Data\\Taxes.txt";
