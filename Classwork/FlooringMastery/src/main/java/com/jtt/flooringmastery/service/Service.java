@@ -19,5 +19,5 @@ public interface Service {
     public void Initialize();
     public void Edit();    
     
-    public void Remove();    
+    public String Remove(String choice);    
 }

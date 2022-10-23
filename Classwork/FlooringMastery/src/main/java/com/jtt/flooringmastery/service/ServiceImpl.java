@@ -38,9 +38,9 @@ public class ServiceImpl implements Service {
     public void Edit(){
         
     }
-    public void Remove()
+    public String Remove(String choice)
     {
-        
+        return m_order.Remove(choice);
     } 
     public void Initialize()
     {

@@ -6,6 +6,8 @@ package com.jtt.flooringmastery.controller;
 
 import com.jtt.flooringmastery.service.Service;
 import com.jtt.flooringmastery.view.view;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  *
@@ -15,6 +17,7 @@ public class Controller {
 
     private view m_view;
     private Service m_service;
+    private String m_sDate="";
     public Controller(view vw, Service srvc)
     {
         this.m_view=vw;
@@ -22,6 +25,9 @@ public class Controller {
     }
     public void Initialize()
     {
+        Date date = new Date();
+        SimpleDateFormat dmyFormat = new SimpleDateFormat("MMddyyyy");
+        m_sDate = dmyFormat.format(date);
         m_service.Initialize();
     }
     public void run() {
@@ -46,25 +52,29 @@ public class Controller {
                     break;                
                 default:
             }
-            
         }while(choice !=6);
     }
     
     private void Display()
     {
-        String sDate=m_view.GetDisplay();
-        String list=m_service.Display(sDate);
-        m_view.ShowString(list);
+        m_sDate=m_view.GetDisplay();
+        String mylist=m_service.Display(m_sDate);
+        m_view.ShowString(mylist);
     }
     private void Add(){
         m_service.Add();
     }
     private void Edit(){
         m_service.Edit();
+        
     }
     private void Remove()
     {
-       m_service.Remove();
+      String list=m_service.Display(m_sDate);
+      m_view.ShowString(list);
+      m_view.ShowString("Enter number to remove");
+      String choice=m_view.GetString();
+      String result=m_service.Remove(choice);
+      m_view.ShowString(result);
     }
-    
 }

@@ -41,4 +41,8 @@ public class view {
         System.out.println("Please Enter a date to display:MMDDYYY:");
        return  m_userio.GetString();
     }
+    public String GetString()
+    {
+        return m_userio.GetString();
+    }
 }

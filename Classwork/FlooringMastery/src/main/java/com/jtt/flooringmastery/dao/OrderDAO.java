@@ -16,20 +16,42 @@ import java.util.Scanner;
  * @author Jenny
  */
 public class OrderDAO {
+
     private ArrayList<OrderDTO> m_list;
-    private String m_Orders=""; 
-    private String m_Filename="";
-    
-  public OrderDAO() {
+    private String m_Orders = "";
+    private String m_Filename = "";
+
+    public OrderDAO() {
         m_list = new ArrayList<OrderDTO>();
-    }   
-  
-   public void LoadFile(String filename, String delimeter) {
+    }
+
+    public String Remove(String choice) {
+        String result = "Order " + choice + " was not found";
+        try {
+            int ichoice = Integer.parseInt(choice);
+            for (int i = 0; i < m_list.size(); i++) {
+                OrderDTO data = m_list.get(i);
+                if (ichoice == data.getM_OrderNumber()) {
+                    m_list.remove(i);
+                    result="Order removed\n";
+                    RebuildOrders();
+                    result+=m_Orders;
+                    
+                    // call save here
+                }
+            }
+        } catch (Exception e) {
+            result = "Order " + choice + " was not a valid positive integer";
+        }
+        return result;
+    }
+
+    public void LoadFile(String filename, String delimeter) {
         try {
             File myfile = new File(filename);
-            m_Filename=filename;
+            m_Filename = filename;
             m_list.clear();
-            m_Orders="";
+            m_Orders = "";
             Scanner readFile = new Scanner(myfile);
             int counter = 0;
             while (readFile.hasNextLine()) {
@@ -46,15 +68,15 @@ public class OrderDAO {
                     data.setM_TaxRate(taxrate);
                     data.setM_ProductType(temp[4]);
                     BigDecimal area = new BigDecimal(temp[5]);
-                    data.setM_Area(area);  
+                    data.setM_Area(area);
                     BigDecimal costsq = new BigDecimal(temp[6]);
-                    data.setM_CostPerSquareFoot(costsq);                    
+                    data.setM_CostPerSquareFoot(costsq);
                     BigDecimal lbrcostsq = new BigDecimal(temp[7]);
                     data.setM_LaborCostPerSquareFoot(lbrcostsq);
                     BigDecimal mcost = new BigDecimal(temp[8]);
                     data.setM_MaterialCost(mcost);
                     BigDecimal lcost = new BigDecimal(temp[9]);
-                    data.setM_LaborCost(lcost);                    
+                    data.setM_LaborCost(lcost);
                     BigDecimal tax = new BigDecimal(temp[10]);
                     data.setM_Tax(tax);
                     BigDecimal total = new BigDecimal(temp[11]);
@@ -62,11 +84,11 @@ public class OrderDAO {
                     data.setM_Area(area);
                     m_list.add(data);
                 }
-                 m_Orders += temp[0] + " \t" + temp[1] + " \t" + temp[2] 
-                         + " \t" + temp[3]   + " \t" + temp[4] + " \t" + temp[5]
-                         + " \t" + temp[6]   + " \t" + temp[7] + " \t" + temp[8]
-                         + " \t" + temp[9]   + " \t" + temp[10] + " \t" + temp[11]
-                         + "\n";
+                m_Orders += temp[0] + " \t" + temp[1] + " \t" + temp[2]
+                        + " \t" + temp[3] + " \t" + temp[4] + " \t" + temp[5]
+                        + " \t" + temp[6] + " \t" + temp[7] + " \t" + temp[8]
+                        + " \t" + temp[9] + " \t" + temp[10] + " \t" + temp[11]
+                        + "\n";
                 counter = counter + 1;
             }
             readFile.close();
@@ -75,9 +97,34 @@ public class OrderDAO {
 
         }
     }   // end load 
-  
-     public String getOrderInfo() {
+
+    public String getOrderInfo() {
         return this.m_Orders;
-    }   
-    
+    }
+
+    private void RebuildOrders() {
+        m_Orders= "OrderNumber 	CustomerName 	State 	TaxRate 	ProductType 	Area 	CostPerSquareFoot 	LaborCostPerSquareFoot 	MaterialCost 	LaborCost 	Tax 	Total\n";
+        String[] temp= new String[14];
+        for (int i = 0; i < m_list.size(); i++) {
+            OrderDTO data = m_list.get(i);
+
+            temp[0] = data.getM_OrderNumber().toString();
+            temp[1] = data.getM_CustomerName();
+            temp[2] = data.getM_State();
+            temp[3] = data.getM_TaxRate().toString();
+            temp[4] = data.getM_ProductType().toString();
+            temp[5] = data.getM_Area().toString();
+            temp[6] = data.getM_CostPerSquareFoot().toString();
+            temp[7] = data.getM_LaborCostPerSquareFoot().toString();
+            temp[8] = data.getM_MaterialCost().toString();
+            temp[9] = data.getM_LaborCost().toString();
+            temp[10] = data.getM_Tax().toString();
+            temp[11] = data.getM_Total().toString();
+            m_Orders += temp[0] + " \t" + temp[1] + " \t" + temp[2]
+                    + " \t" + temp[3] + " \t" + temp[4] + " \t" + temp[5]
+                    + " \t" + temp[6] + " \t" + temp[7] + " \t" + temp[8]
+                    + " \t" + temp[9] + " \t" + temp[10] + " \t" + temp[11]
+                    + "\n";
+        }
+    }
 }
