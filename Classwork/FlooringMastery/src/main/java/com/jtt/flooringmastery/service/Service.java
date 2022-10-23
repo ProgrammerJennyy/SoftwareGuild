@@ -13,7 +13,7 @@ import com.jtt.flooringmastery.dao.TaxesDAO;
  * @author Jenny
  */
 public interface Service {
-   public void Display();
+   public String Display(String val);
     public void Add();
         
     public void Initialize();

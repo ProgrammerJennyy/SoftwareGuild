@@ -23,7 +23,7 @@ public class Main {
            new ClassPathXmlApplicationContext("applicationContext.xml");
             Controller controller = 
            ctx.getBean("controller", Controller.class);
-        controller.run();  
+           controller.run();  
     }
     
 }

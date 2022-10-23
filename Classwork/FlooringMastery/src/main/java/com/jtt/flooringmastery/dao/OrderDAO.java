@@ -18,6 +18,7 @@ import java.util.Scanner;
 public class OrderDAO {
     private ArrayList<OrderDTO> m_list;
     private String m_Orders=""; 
+    private String m_Filename="";
     
   public OrderDAO() {
         m_list = new ArrayList<OrderDTO>();
@@ -26,6 +27,9 @@ public class OrderDAO {
    public void LoadFile(String filename, String delimeter) {
         try {
             File myfile = new File(filename);
+            m_Filename=filename;
+            m_list.clear();
+            m_Orders="";
             Scanner readFile = new Scanner(myfile);
             int counter = 0;
             while (readFile.hasNextLine()) {

@@ -15,7 +15,10 @@ public class view {
     public view(UserIO val) {
         this.m_userio = val;
     }
-
+    public void ShowString(String val)
+    {
+        System.out.println(val);
+    }
     public void ShowMenu() {
    System.out.println(
    "   * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *\n"    
@@ -32,5 +35,10 @@ public class view {
     }
     public Integer GetSelection() {
        return m_userio.GetInput();
+    }
+    public String GetDisplay()
+    {
+        System.out.println("Please Enter a date to display:MMDDYYY:");
+       return  m_userio.GetString();
     }
 }

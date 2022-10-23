@@ -22,11 +22,15 @@ public class ServiceImpl implements Service {
           this.m_prod=prod;
           this.m_taxes=taxes;
       }
-    public void Display()
+    public String Display(String val)
     {
-        String filenameprod="Orders\\Orders_06022013.txt";
+        String filenameprod="Orders\\Orders_"+val+".txt";
         this.m_order.LoadFile(filenameprod, ",");
-        
+        String list=m_order.getOrderInfo();
+        if(list.length()<5){
+            list="Date Contains no orders.";
+        }
+        return list;
     }
     public void Add(){
         
@@ -40,8 +44,7 @@ public class ServiceImpl implements Service {
     } 
     public void Initialize()
     {
-        String filenameorder="Orders\\Orders_06022013.txt";
-        this.m_order.LoadFile(filenameorder, ",");        
+    
         String filenameprod="Data\\Products.txt";
         this.m_prod.LoadFile(filenameprod, ",");
         String filenametaxes="Data\\Taxes.txt";

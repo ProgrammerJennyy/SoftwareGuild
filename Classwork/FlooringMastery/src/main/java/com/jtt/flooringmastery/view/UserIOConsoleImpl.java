@@ -14,7 +14,10 @@ public class UserIOConsoleImpl implements UserIO {
 
     Scanner myInput = new Scanner(System.in);
     private int m_input;
-
+    public String GetString()
+    {
+        return this.myInput.nextLine();
+    }
     public int GetInput() {
         do {
             System.out.println("Enter integer selection: ");

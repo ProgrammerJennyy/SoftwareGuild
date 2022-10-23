@@ -12,4 +12,5 @@ public interface UserIO {
  
     public int GetInput();
     public boolean ValidateInput();
+    public String GetString();
 }

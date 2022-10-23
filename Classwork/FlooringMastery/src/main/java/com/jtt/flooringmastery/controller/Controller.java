@@ -52,7 +52,9 @@ public class Controller {
     
     private void Display()
     {
-        m_service.Display();
+        String sDate=m_view.GetDisplay();
+        String list=m_service.Display(sDate);
+        m_view.ShowString(list);
     }
     private void Add(){
         m_service.Add();
