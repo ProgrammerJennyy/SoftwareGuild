@@ -13,6 +13,22 @@ import com.jtt.flooringmastery.dao.TaxesDAO;
  * @author Jenny
  */
 public class ServiceImpl implements Service {
+    
+      //Order CreateFlooringOrder(Order currentOrder)
+      //Order UpdateFlooringOrder (Order updatedOrder , Datetime orderDate) 
+      //void DeleteFlooringOrder (int(or string) orderId, Datetime orderDate)
+      //Order ReadFlooringOrderByIdAndDate (int (or string) orderId, Datetme orderDate)
+      //List<Order> ReadFlooringOrdersByDate (Datetime orderDate) 
+      
+      //What CRUD do i need with Products?
+      //What CRUD do I need with Taxes?
+    
+      //How do I calcuate the totals
+    
+      //What happens if it returns no Order/Orders (or Product and Taxes)
+    
+      //Only TALKS to the DAO (does not do the DAO work for it - the DAO loads things itself)
+    
       private OrderDAO m_order;
       private ProductDAO m_prod;
       private TaxesDAO  m_taxes;

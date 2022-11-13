@@ -18,12 +18,17 @@ public class ProductDAO {
 
     private ArrayList<ProductDTO> m_list;
     private String m_Products="";
+    private String fileName = "";
+    
+    //How do I get all of them from the DAO?
 
     public ProductDAO() {
         m_list = new ArrayList<ProductDTO>();
+        //Load File Here
     }
-
-    public void LoadFile(String filename, String delimeter) {
+    
+    //Does not need to be part of the interface because it is ONLY part of an implementation
+    private void LoadFile(String filename, String delimeter) {
         try {
             File myfile = new File(filename);
             Scanner readFile = new Scanner(myfile);
@@ -33,6 +38,7 @@ public class ProductDAO {
                 String row;
                 row = readFile.nextLine();
                 String temp[] = row.split(delimeter);
+                //Use Loop Here
                 if (counter > 0) { // Dont add header to listarray
                     data.setM_ProductType(temp[0]);
                     BigDecimal num = new BigDecimal(temp[1]);
@@ -51,11 +57,13 @@ public class ProductDAO {
             System.out.println("caught exception in productdto fileload ");
         }
     }   // end load
-
+    
+    //How does it know which one to get?
     public String getProductInfo() {
         return m_Products;
     }
-
+    
+    //Need Only 1 To Get a Single One
     public BigDecimal getCostPerSquareFoot(int item) {
         BigDecimal retval = new BigDecimal(-1.0);
         if (item > m_list.size()) {

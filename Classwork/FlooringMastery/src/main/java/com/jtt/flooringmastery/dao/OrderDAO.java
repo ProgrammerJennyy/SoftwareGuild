@@ -15,12 +15,20 @@ import java.util.Scanner;
  *
  * @author Jenny
  */
+//OrderDAOFileImpl
+//OrderDAOStubImpl (mock)
+//OrderDAO - should be interface
 public class OrderDAO {
-
+/** 
+ * Define interface for OrderDAO and ProductDao for all 3 interfaces 
+ */
     private ArrayList<OrderDTO> m_list;
     private String m_Orders = "";
-    private String m_Filename = "";
+    private String m_Filename = ""; //Put the File Base Name Here
 
+    //How do I update here?
+    //How do I get a specific one?
+    //How do I add one? (need the date)
     public OrderDAO() {
         m_list = new ArrayList<OrderDTO>();
     }
@@ -46,6 +54,7 @@ public class OrderDAO {
         return result;
     }
 
+    //Needs to Not be part of the interface and ONLY happen in this class
     public void LoadFile(String filename, String delimeter) {
         try {
             File myfile = new File(filename);
@@ -98,6 +107,7 @@ public class OrderDAO {
         }
     }   // end load 
 
+    //Needs to Load Orders/File First
     public String getOrderInfo() {
         return this.m_Orders;
     }
