@@ -53,7 +53,7 @@ public class TaxesDAO {
         }
     }   // end load
 
-    public String getTaxesInfo() {
+    public String getTaxesInfoList() {
         return m_Taxes;
     }
 

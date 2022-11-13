@@ -5,7 +5,7 @@
 package com.jtt.flooringmastery.dao;
 
 import com.jtt.flooringmastery.dto.OrderDTO;
-import com.jtt.flooringmastery.dto.TaxesDTO;
+
 import java.io.File;
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -42,7 +42,7 @@ public class OrderDAO {
                 if (ichoice == data.getM_OrderNumber()) {
                     m_list.remove(i);
                     result="Order removed\n";
-                    RebuildOrders();
+                    RebuildDailyOrdersList();
                     result+=m_Orders;
                     
                     // call save here
@@ -108,11 +108,11 @@ public class OrderDAO {
     }   // end load 
 
     //Needs to Load Orders/File First
-    public String getOrderInfo() {
+    public String getAllOrdersInfoList() {
         return this.m_Orders;
     }
 
-    private void RebuildOrders() {
+    private void RebuildDailyOrdersList() {
         m_Orders= "OrderNumber 	CustomerName 	State 	TaxRate 	ProductType 	Area 	CostPerSquareFoot 	LaborCostPerSquareFoot 	MaterialCost 	LaborCost 	Tax 	Total\n";
         String[] temp= new String[14];
         for (int i = 0; i < m_list.size(); i++) {

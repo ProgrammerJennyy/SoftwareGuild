@@ -62,7 +62,7 @@ public class ProductDAO {
     
     //How does it know which one to get?
     // its all items with returns in 1 string
-    public String getProductInfo() {
+    public String getProductsInfoList() {
         return m_Products;
     }
     

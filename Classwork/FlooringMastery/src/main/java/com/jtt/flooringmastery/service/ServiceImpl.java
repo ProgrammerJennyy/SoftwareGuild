@@ -42,7 +42,7 @@ public class ServiceImpl implements Service {
     {
         String filenameprod="Orders\\Orders_"+val+".txt";
         this.m_order.LoadFile(filenameprod, ",");
-        String list=m_order.getOrderInfo();
+        String list=m_order.getAllOrdersInfoList();
         if(list.length()<5){
             list="Date Contains no orders.";
         }
