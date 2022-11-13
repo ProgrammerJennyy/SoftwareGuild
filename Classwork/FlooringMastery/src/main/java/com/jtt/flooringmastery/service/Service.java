@@ -16,8 +16,7 @@ public interface Service {
    public String Display(String val);
     public void Add();
         
-    public void Initialize();
-    public void Edit();    
+    public void Edit();
     
     public String Remove(String choice);    
 }

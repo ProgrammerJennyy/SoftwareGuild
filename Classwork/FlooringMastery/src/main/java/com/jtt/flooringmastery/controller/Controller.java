@@ -28,7 +28,6 @@ public class Controller {
         Date date = new Date();
         SimpleDateFormat dmyFormat = new SimpleDateFormat("MMddyyyy");
         m_sDate = dmyFormat.format(date);
-        m_service.Initialize();
     }
     public void run() {
         Initialize();

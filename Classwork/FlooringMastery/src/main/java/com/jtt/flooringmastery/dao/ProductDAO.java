@@ -18,17 +18,19 @@ public class ProductDAO {
 
     private ArrayList<ProductDTO> m_list;
     private String m_Products="";
-    private String fileName = "";
+    private String filename = "";
     
     //How do I get all of them from the DAO?
 
     public ProductDAO() {
         m_list = new ArrayList<ProductDTO>();
+        filename="Data\\Products.txt";
         //Load File Here
+        LoadFile(",");
     }
     
     //Does not need to be part of the interface because it is ONLY part of an implementation
-    private void LoadFile(String filename, String delimeter) {
+    private void LoadFile( String delimeter) {
         try {
             File myfile = new File(filename);
             Scanner readFile = new Scanner(myfile);
@@ -59,6 +61,7 @@ public class ProductDAO {
     }   // end load
     
     //How does it know which one to get?
+    // its all items with returns in 1 string
     public String getProductInfo() {
         return m_Products;
     }

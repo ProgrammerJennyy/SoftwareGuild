@@ -18,12 +18,13 @@ public class TaxesDAO {
 
     private ArrayList<TaxesDTO> m_list;
     private String m_Taxes="";
-
+    private String filename="";
     public TaxesDAO() {
         m_list = new ArrayList<TaxesDTO>();
+        filename="Data\\Taxes.txt";
+        LoadFile(",");
     }
-
-    public void LoadFile(String filename, String delimeter) {
+    private void LoadFile( String delimeter) {
         try {
             File myfile = new File(filename);
             Scanner readFile = new Scanner(myfile);
