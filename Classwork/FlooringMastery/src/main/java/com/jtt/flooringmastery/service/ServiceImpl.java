@@ -7,6 +7,7 @@ package com.jtt.flooringmastery.service;
 import com.jtt.flooringmastery.dao.OrderDAO;
 import com.jtt.flooringmastery.dao.ProductDAO;
 import com.jtt.flooringmastery.dao.TaxesDAO;
+import com.jtt.flooringmastery.dto.OrderDTO;
 
 /**
  *
@@ -51,7 +52,9 @@ public class ServiceImpl implements Service {
     public void Add(){
         
     }
-    public void Edit(){
+    public OrderDTO Edit(Integer choice){
+     return m_order.Edit(choice); 
+        
         
     }
     public String Remove(String choice)

@@ -4,6 +4,7 @@
  */
 package com.jtt.flooringmastery.controller;
 
+import com.jtt.flooringmastery.dto.OrderDTO;
 import com.jtt.flooringmastery.service.Service;
 import com.jtt.flooringmastery.view.view;
 import java.text.SimpleDateFormat;
@@ -64,7 +65,18 @@ public class Controller {
         m_service.Add();
     }
     private void Edit(){
-        m_service.Edit();
+         m_sDate=m_view.GetDisplay();
+        String mylist=m_service.Display(m_sDate);
+        m_view.ShowString(mylist);
+        Integer choice=m_view.GetOrderInteger();        
+        
+        OrderDTO edited=m_service.Edit(choice);
+      if(edited.getM_OrderNumber()==-1){
+    
+         
+    }  
+      else {
+              }
         
     }
     private void Remove()

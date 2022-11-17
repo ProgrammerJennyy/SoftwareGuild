@@ -32,6 +32,21 @@ public class UserIOConsoleImpl implements UserIO {
         } while (m_input == 0 || ValidateInput() == false);
         return m_input;
     }
+    
+     public int GetOrderNumber() {
+        do {
+            System.out.println("Enter order number: ");
+            try {
+                String X = myInput.nextLine();
+                m_input = Integer.parseInt(X);
+
+            } catch (Exception e) {
+                m_input = 0;
+                System.out.println("enter correct order number please  ");
+            }
+        } while (m_input == 0 || ValidateInput() == false);
+        return m_input;
+    }
 
     public boolean ValidateInput() {
         if (m_input > 0 && m_input < 7) {

@@ -45,4 +45,10 @@ public class view {
     {
         return m_userio.GetString();
     }
+public Integer GetOrderInteger()
+{
+    return m_userio.GetOrderNumber(); 
+    
 }
+
+        }

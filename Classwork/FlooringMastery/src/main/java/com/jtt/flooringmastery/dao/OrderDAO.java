@@ -111,6 +111,22 @@ public class OrderDAO {
     public String getAllOrdersInfoList() {
         return this.m_Orders;
     }
+    public OrderDTO Edit(Integer choice) {
+
+        try {
+            int ichoice = choice;
+            for (int i = 0; i < m_list.size(); i++) {
+                OrderDTO data = m_list.get(i);
+                if (ichoice == data.getM_OrderNumber()) {
+                    return data;
+                }
+            }
+        } catch (Exception e) {
+        }
+        OrderDTO notfound = new OrderDTO();
+        notfound.setM_OrderNumber(-1);
+        return notfound;
+    }
 
     private void RebuildDailyOrdersList() {
         m_Orders= "OrderNumber 	CustomerName 	State 	TaxRate 	ProductType 	Area 	CostPerSquareFoot 	LaborCostPerSquareFoot 	MaterialCost 	LaborCost 	Tax 	Total\n";
