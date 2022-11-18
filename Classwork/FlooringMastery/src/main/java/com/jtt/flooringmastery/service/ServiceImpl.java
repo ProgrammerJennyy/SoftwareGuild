@@ -49,9 +49,31 @@ public class ServiceImpl implements Service {
         }
         return list;
     }
+  public String Display()
+    {
+        String list=m_order.getAllOrdersInfoList();
+        if(list.length()<5){
+            list="Date Contains no orders.";
+        }
+        return list;
+    }
+
+
+
+
+
+
     public void Add(){
         
     }
+    
+     public void AddOrderDTO(OrderDTO val){
+         m_order.AddOrderDTO(val);
+         
+     }
+    
+    
+    
     public OrderDTO Edit(Integer choice){
      return m_order.Edit(choice); 
         

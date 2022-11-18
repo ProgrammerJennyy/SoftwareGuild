@@ -11,7 +11,22 @@ package com.jtt.flooringmastery.view;
 public class view {
 
     private UserIO m_userio;
-
+    public void GetEditChoice(){
+    
+       System.out.println(
+   "   * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *\n"    
+   +"* <<Edit Flooring Order>>\n"
+   +"* 1. Customer Name\n"
+   +"* 2. State\n"
+   +"* 3. Product Type\n"
+   +"* 4. Area\n"
+   +"* 5. Keep Changes\n"
+   +"* 6. Cancel Discard Changes\n"
+   +"*\n"
+   +"* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * \n"
+    ); 
+    
+    }
     public view(UserIO val) {
         this.m_userio = val;
     }

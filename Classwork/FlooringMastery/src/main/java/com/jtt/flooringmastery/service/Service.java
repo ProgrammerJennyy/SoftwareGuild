@@ -15,8 +15,9 @@ import com.jtt.flooringmastery.dto.OrderDTO;
  */
 public interface Service {
    public String Display(String val);
+   public String Display(); 
     public void Add();
-        
+    public void AddOrderDTO(OrderDTO val); 
     public OrderDTO Edit(Integer choice);
     
     public String Remove(String choice);    

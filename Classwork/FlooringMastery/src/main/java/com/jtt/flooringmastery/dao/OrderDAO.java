@@ -53,6 +53,13 @@ public class OrderDAO {
         }
         return result;
     }
+    
+     public void AddOrderDTO(OrderDTO val)
+     {
+         m_list.add(val); 
+         RebuildDailyOrdersList(); 
+     }
+    
 
     //Needs to Not be part of the interface and ONLY happen in this class
     public void LoadFile(String filename, String delimeter) {
