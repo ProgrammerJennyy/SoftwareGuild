@@ -95,14 +95,74 @@ int choice =0;
                     order.setM_CustomerName (m_view.GetString());
                     break;
                 case 2:
+                {
                     //State();
+                  
+            //Get the state abbreviation
+            //String stateAbbreviationInput = view.getStateAbbreviation();
+            //Check that the state exists in the taxes file
+            //sservice.checkStateAgainstTaxFile(stateAbbreviationInput);
+            // 
+                   BigDecimal tr = new BigDecimal(-1); 
+                BigDecimal invalidnum= new BigDecimal(-1);
+
+                   String stateInput="";
+                   //prompt user to change state 
+                   do{
+                    m_view.ShowString(m_service.getTaxesInfoList());
+                    m_view.ShowString("Enter Updated State Abbreviation");
+                    stateInput = m_view.GetString(); 
+                    tr=m_service.getM_TaxRate(stateInput);
+                    //check state for -1 (if we can find one) tax rate..
+                    }while(tr.equals(invalidnum));
+                    order.setM_State(stateInput);
+                    order.setM_TaxRate(tr);
+
+                    //change state in the order dto
+                    // change tax rate in order dto 
+                    //recalculate everything ...
+                    //recalculate tax and total in DTO 
+       
+                    
+                    //Tax = (MaterialCost + LaborCost) * (TaxRate/100)
+                    BigDecimal temptaxcost = new BigDecimal(0); 
+                    temptaxcost = order.getM_MaterialCost().add(order.getM_LaborCost()); 
+                    temptaxcost = temptaxcost.multiply(order.getM_TaxRate());
+                    temptaxcost = temptaxcost.divide(new BigDecimal("100").setScale(2, RoundingMode.HALF_UP));
+                    order.setM_Tax(temptaxcost);
+                    
+                    //Total = (MaterialCost + LaborCost + Tax)
+                    BigDecimal temptotal = new BigDecimal(0); 
+                    temptotal = order.getM_MaterialCost().add(order.getM_LaborCost()); 
+                    temptotal = temptotal.add(order.getM_Tax()); 
+                    order.setM_Total(temptotal);  
+                    
+                    // will change your tax rate 
+                    //call state 
+            }
                     break;
                 case 3:
                     //Product Type();
+                    
+                    // prompt user for product type 
+                    // check if type exists -1 
+                    // if exists set the labor rate and material type 
+                    // AND need cost rate... cost per sq ft, and labor cost per sq ft 
+                    //found in prodict DTO (above) 
+                    //recalculations... look at order DTO.. 
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
                     break;
                 case 4:
+                {
                     //Area
-                    
                     //prompt user
                     m_view.ShowString("Enter Updated Area");
                     
@@ -111,23 +171,18 @@ int choice =0;
                                                                         
                     
                     //recaluclations - cost - tax 
-                    
-                    
-                            
+                                                                   
                     //MaterialCost = (Area * CostPerSquareFoot)
                     BigDecimal tempmaterialcost = new BigDecimal(0); 
                     tempmaterialcost = order.getM_Area().multiply(order.getM_CostPerSquareFoot()); 
                     order.setM_MaterialCost(tempmaterialcost);
-                                      
-
+                                    
                     //LaborCost = (Area * LaborCostPerSquareFoot)
                     BigDecimal templaborcost = new BigDecimal(0); 
                     templaborcost = order.getM_Area().multiply(order.getM_LaborCostPerSquareFoot()); 
                     order.setM_LaborCost(templaborcost);
-                            
-                    
+                         
                     //Tax = (MaterialCost + LaborCost) * (TaxRate/100)
-                   
                     BigDecimal temptaxcost = new BigDecimal(0); 
                     temptaxcost = order.getM_MaterialCost().add(order.getM_LaborCost()); 
                     temptaxcost = temptaxcost.multiply(order.getM_TaxRate());
@@ -144,7 +199,7 @@ int choice =0;
                     order.setM_Total(temptotal);  
                     
                                      
-                    
+                }
                     break;
                 case 5:
                     //Save

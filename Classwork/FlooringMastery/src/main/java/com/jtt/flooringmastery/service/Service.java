@@ -8,6 +8,7 @@ import com.jtt.flooringmastery.dao.OrderDAO;
 import com.jtt.flooringmastery.dao.ProductDAO;
 import com.jtt.flooringmastery.dao.TaxesDAO;
 import com.jtt.flooringmastery.dto.OrderDTO;
+import java.math.BigDecimal;
 
 /**
  *
@@ -19,6 +20,8 @@ public interface Service {
     public void Add();
     public void AddOrderDTO(OrderDTO val); 
     public OrderDTO Edit(Integer choice);
-    
+      public BigDecimal getM_TaxRate(String item);
+      public String getTaxesInfoList();
+
     public String Remove(String choice);    
 }

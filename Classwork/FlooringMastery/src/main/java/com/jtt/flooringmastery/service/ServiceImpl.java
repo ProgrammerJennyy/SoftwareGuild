@@ -8,6 +8,7 @@ import com.jtt.flooringmastery.dao.OrderDAO;
 import com.jtt.flooringmastery.dao.ProductDAO;
 import com.jtt.flooringmastery.dao.TaxesDAO;
 import com.jtt.flooringmastery.dto.OrderDTO;
+import java.math.BigDecimal;
 
 /**
  *
@@ -58,9 +59,14 @@ public class ServiceImpl implements Service {
         return list;
     }
 
-
-
-
+ public String getTaxesInfoList()
+ {
+     return m_taxes.getTaxesInfoList();
+ }
+    public BigDecimal getM_TaxRate(String item)
+    {
+        return m_taxes.getM_TaxRate(item);
+    }
 
 
     public void Add(){
