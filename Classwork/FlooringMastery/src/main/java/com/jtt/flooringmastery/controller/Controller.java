@@ -65,6 +65,11 @@ public class Controller {
 
     private void Add() {
         m_service.Add();
+        
+        
+        
+        
+        
     }
 
     private void Edit() {
@@ -112,12 +117,7 @@ int choice =0;
                     order.setM_State(stateInput);
                     order.setM_TaxRate(tr);
 
-                    //change state in the order dto
-                    // change tax rate in order dto 
-                    //recalculate everything ...
-                    //recalculate tax and total in DTO 
-       
-                    
+                                     
                     //Tax = (MaterialCost + LaborCost) * (TaxRate/100)
                     BigDecimal temptaxcost = new BigDecimal(0); 
                     temptaxcost = order.getM_MaterialCost().add(order.getM_LaborCost()); 
@@ -139,29 +139,22 @@ int choice =0;
                     //Product Type();
                     
                                 {
-                    //State;                
                    BigDecimal tr = new BigDecimal(-1); 
                    BigDecimal invalidnum= new BigDecimal(-1);
 
                    String prodTyper="";
-                   //prompt user to change state 
+                   //prompt user to change type 
                    do{
                     m_view.ShowString(m_service.getProductsInfoList());
                     m_view.ShowString("Please Enter the product type");
                     prodTyper = m_view.GetString(); 
                     tr=m_service.getCostPerSquareFoot(prodTyper);
-                    //check state for -1 (if we can find one) tax rate..
+                    //check for -1 (if we can find one) product type cost per sq ft 
                     }while(tr.equals(invalidnum));
                     order.setM_ProductType(prodTyper);
                     order.setM_CostPerSquareFoot(tr);
                     order.setM_LaborCostPerSquareFoot(m_service.getLaborCostPerSquareFoot(prodTyper));
-                    
-
-                    //change state in the order dto
-                    // change tax rate in order dto 
-                    //recalculate everything ...
-                    //recalculate tax and total in DTO 
-       
+                   
                     //MaterialCost = (Area * CostPerSquareFoot)
                     BigDecimal tempmaterialcost = new BigDecimal(0); 
                     tempmaterialcost = order.getM_Area().multiply(order.getM_CostPerSquareFoot()); 
@@ -185,31 +178,8 @@ int choice =0;
                     temptotal = temptotal.add(order.getM_Tax()); 
                     order.setM_Total(temptotal);  
                     
-                    // will change your tax rate 
-                    //call state 
-            }
-                    
-    
-                    
-                    
-                    
-                    
-                    // prompt user for product type 
-                    // check if type exists -1 
-                    // if exists set the labor rate and material type 
-                    // AND need cost rate... cost per sq ft, and labor cost per sq ft 
-                    //found in prodict DTO (above) 
-                    //recalculations... look at order DTO.. 
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    break;
+                                }
+                break;
                 case 4:
                 {
                     //Area

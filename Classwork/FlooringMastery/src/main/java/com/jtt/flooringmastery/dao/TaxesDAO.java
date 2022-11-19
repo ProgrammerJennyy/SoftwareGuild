@@ -41,10 +41,14 @@ public class TaxesDAO {
                     BigDecimal rate = new BigDecimal(temp[2]);
                     data.setM_TaxRate(rate);
                     m_list.add(data);
-                    m_Taxes += counter + ": ";
+                   // m_Taxes += counter + ": ";
                 }
-                m_Taxes += temp[0] + " \t" + temp[1] + " \t" + temp[2] + "\n";
+               String format="%15s  %15s  %15s\n";
+               m_Taxes += String.format(format,temp[0],temp[1],temp[2]);
                 counter = counter + 1;
+                
+                
+                
             }
             readFile.close();
         } // end try // end try

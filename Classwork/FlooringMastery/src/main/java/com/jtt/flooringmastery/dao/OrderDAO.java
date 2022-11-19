@@ -100,11 +100,11 @@ public class OrderDAO {
                     data.setM_Area(area);
                     m_list.add(data);
                 }
-                m_Orders += temp[0] + " \t" + temp[1] + " \t" + temp[2]
-                        + " \t" + temp[3] + " \t" + temp[4] + " \t" + temp[5]
-                        + " \t" + temp[6] + " \t" + temp[7] + " \t" + temp[8]
-                        + " \t" + temp[9] + " \t" + temp[10] + " \t" + temp[11]
-                        + "\n";
+               String format="%15s  %15s  %15s  %15s  %15s  %15s  %22s  %22s  %22s  %15s  %15s  %15s\n";
+               m_Orders += String.format(format,temp[0],temp[1],temp[2],
+                         temp[3],temp[4],temp[5],
+                        temp[6], temp[7],temp[8]
+                        ,temp[9], temp[10], temp[11]);
                 counter = counter + 1;
             }
             readFile.close();
