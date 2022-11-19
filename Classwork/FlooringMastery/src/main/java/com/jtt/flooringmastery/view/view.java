@@ -4,6 +4,8 @@
  */
 package com.jtt.flooringmastery.view;
 
+import java.math.BigDecimal;
+
 /**
  *
  * @author Jenny
@@ -12,7 +14,7 @@ public class view {
 
     private UserIO m_userio;
     public void GetEditChoice(){
-    
+        
        System.out.println(
    "   * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *\n"    
    +"* <<Edit Flooring Order>>\n"
@@ -51,6 +53,13 @@ public class view {
     public Integer GetSelection() {
        return m_userio.GetInput();
     }
+    
+    public BigDecimal GetBigDecimal(){
+        return m_userio.GetBigDecimal(); 
+        
+              
+    }
+    
     public String GetDisplay()
     {
         System.out.println("Please Enter a date to display:MMDDYYY:");

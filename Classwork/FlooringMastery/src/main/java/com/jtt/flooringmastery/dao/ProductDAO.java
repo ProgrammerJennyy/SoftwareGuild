@@ -76,7 +76,30 @@ public class ProductDAO {
         return retval;
     }
 
-    public BigDecimal getLaborCostPerSquareFoot(int item) {
+     public BigDecimal getCostPerSquareFoot(String item) {
+        BigDecimal retval = new BigDecimal(-1.0);
+        for (int i = 0; i < m_list.size(); i++) {
+             ProductDTO temp = m_list.get(i);
+            if (item.compareTo(temp.getM_ProductType()) == 0) {
+                retval = temp.getM_CostPerSquareFoot();
+            }
+        }
+        return retval;
+    }
+
+    
+     public BigDecimal getLaborCostPerSquareFoot(String item) {
+        BigDecimal retval = new BigDecimal(-1.0);
+        for (int i = 0; i < m_list.size(); i++) {
+             ProductDTO temp = m_list.get(i);
+            if (item.compareTo(temp.getM_ProductType()) == 0) {
+                retval = temp.getM_LaborCostPerSquareFoot();
+            }
+        }
+        return retval;
+    }
+
+     public BigDecimal getLaborCostPerSquareFoot(int item) {
         BigDecimal retval = new BigDecimal(-1.0);
         if (item > m_list.size()) {
             ProductDTO temp = m_list.get(item - 1);

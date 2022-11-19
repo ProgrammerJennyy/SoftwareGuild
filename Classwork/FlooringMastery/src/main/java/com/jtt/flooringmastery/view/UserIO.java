@@ -4,6 +4,8 @@
  */
 package com.jtt.flooringmastery.view;
 
+import java.math.BigDecimal;
+
 /**
  *
  * @author Jenny
@@ -14,4 +16,5 @@ public interface UserIO {
     public boolean ValidateInput();
     public String GetString();
     public int GetOrderNumber(); 
+    public BigDecimal GetBigDecimal(); 
 }

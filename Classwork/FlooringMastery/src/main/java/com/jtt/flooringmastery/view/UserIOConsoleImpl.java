@@ -4,6 +4,7 @@
  */
 package com.jtt.flooringmastery.view;
 
+import java.math.BigDecimal;
 import java.util.Scanner;
 
 /**
@@ -47,7 +48,26 @@ public class UserIOConsoleImpl implements UserIO {
         } while (m_input == 0 || ValidateInput() == false);
         return m_input;
     }
+    public BigDecimal GetBigDecimal() {
+        BigDecimal retvalue=new BigDecimal(0.0); 
+               
+        do {
+            System.out.println("Enter new area");
+            try {
+                String X = myInput.nextLine();
+                retvalue = new BigDecimal(X);
 
+            } catch (Exception e) {
+                System.out.println("enter valid area over 100 sq feet");
+            }
+        } while (retvalue.compareTo(new BigDecimal (99.9))!=1);
+        return retvalue; 
+    
+    
+    
+    }
+            
+            
     public boolean ValidateInput() {
         if (m_input > 0 && m_input < 7) {
             return true;

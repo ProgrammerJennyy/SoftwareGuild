@@ -65,5 +65,16 @@ public class TaxesDAO {
         }
         return retval;
     }
+    
+    public BigDecimal getM_TaxRate(String item) {
+        BigDecimal retval = new BigDecimal(-1.0);
+        for (int i = 0; i < m_list.size(); i++) {
+            TaxesDTO temp = m_list.get(i);
+            if (item.compareTo(temp.getM_StateAbbreviation()) == 0) {
+                retval = temp.getM_TaxRate();
+            }
+        }
+        return retval;
+    }
 
 }

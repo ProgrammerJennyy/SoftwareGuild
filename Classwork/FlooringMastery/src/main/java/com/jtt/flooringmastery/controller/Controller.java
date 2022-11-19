@@ -7,6 +7,8 @@ package com.jtt.flooringmastery.controller;
 import com.jtt.flooringmastery.dto.OrderDTO;
 import com.jtt.flooringmastery.service.Service;
 import com.jtt.flooringmastery.view.view;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -99,22 +101,58 @@ int choice =0;
                     //Product Type();
                     break;
                 case 4:
-                    //Area();
+                    //Area
+                    
+                    //prompt user
+                    m_view.ShowString("Enter Updated Area");
+                    
+                    //getbigdecimal 
+                    order.setM_Area(m_view.GetBigDecimal());
+                                                                        
+                    
+                    //recaluclations - cost - tax 
+                    
+                    
+                            
+                    //MaterialCost = (Area * CostPerSquareFoot)
+                    BigDecimal tempmaterialcost = new BigDecimal(0); 
+                    tempmaterialcost = order.getM_Area().multiply(order.getM_CostPerSquareFoot()); 
+                    order.setM_MaterialCost(tempmaterialcost);
+                                      
+
+                    //LaborCost = (Area * LaborCostPerSquareFoot)
+                    BigDecimal templaborcost = new BigDecimal(0); 
+                    templaborcost = order.getM_Area().multiply(order.getM_LaborCostPerSquareFoot()); 
+                    order.setM_LaborCost(templaborcost);
+                            
+                    
+                    //Tax = (MaterialCost + LaborCost) * (TaxRate/100)
+                   
+                    BigDecimal temptaxcost = new BigDecimal(0); 
+                    temptaxcost = order.getM_MaterialCost().add(order.getM_LaborCost()); 
+                    temptaxcost = temptaxcost.multiply(order.getM_TaxRate());
+                    temptaxcost = temptaxcost.divide(new BigDecimal("100").setScale(2, RoundingMode.HALF_UP));
+                    order.setM_Tax(temptaxcost);
+                                                        
+                    //Tax rates are stored as whole numbers
+                    
+
+                    //Total = (MaterialCost + LaborCost + Tax)
+                    BigDecimal temptotal = new BigDecimal(0); 
+                    temptotal = order.getM_MaterialCost().add(order.getM_LaborCost()); 
+                    temptotal = temptotal.add(order.getM_Tax()); 
+                    order.setM_Total(temptotal);  
+                    
+                                     
+                    
                     break;
                 case 5:
-                    //Save();
-                       //Customer Name();
-                    
-                   String temp = Integer.toString(order.getM_OrderNumber()); 
-                   m_service.Remove(temp);
-                   m_service.AddOrderDTO(order); 
-                   
+                    //Save
+                    String temp = Integer.toString(order.getM_OrderNumber());
+                    m_service.Remove(temp);
+                    m_service.AddOrderDTO(order);
                     String mylist = m_service.Display();
                     m_view.ShowString(mylist);
-                                   
-                                 
-                    
-                    
                     break;
                 case 6:
                     //Discard Changes();
@@ -133,5 +171,9 @@ int choice =0;
         String choice = m_view.GetString();
         String result = m_service.Remove(choice);
         m_view.ShowString(result);
+    }
+
+    private BigDecimal BigDecimal(int i) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
