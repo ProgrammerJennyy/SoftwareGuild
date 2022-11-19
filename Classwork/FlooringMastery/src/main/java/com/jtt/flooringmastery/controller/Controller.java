@@ -96,15 +96,9 @@ int choice =0;
                     break;
                 case 2:
                 {
-                    //State();
-                  
-            //Get the state abbreviation
-            //String stateAbbreviationInput = view.getStateAbbreviation();
-            //Check that the state exists in the taxes file
-            //sservice.checkStateAgainstTaxFile(stateAbbreviationInput);
-            // 
+                    //State;                
                    BigDecimal tr = new BigDecimal(-1); 
-                BigDecimal invalidnum= new BigDecimal(-1);
+                   BigDecimal invalidnum= new BigDecimal(-1);
 
                    String stateInput="";
                    //prompt user to change state 
@@ -143,6 +137,62 @@ int choice =0;
                     break;
                 case 3:
                     //Product Type();
+                    
+                                {
+                    //State;                
+                   BigDecimal tr = new BigDecimal(-1); 
+                   BigDecimal invalidnum= new BigDecimal(-1);
+
+                   String prodTyper="";
+                   //prompt user to change state 
+                   do{
+                    m_view.ShowString(m_service.getProductsInfoList());
+                    m_view.ShowString("Please Enter the product type");
+                    prodTyper = m_view.GetString(); 
+                    tr=m_service.getCostPerSquareFoot(prodTyper);
+                    //check state for -1 (if we can find one) tax rate..
+                    }while(tr.equals(invalidnum));
+                    order.setM_ProductType(prodTyper);
+                    order.setM_CostPerSquareFoot(tr);
+                    order.setM_LaborCostPerSquareFoot(m_service.getLaborCostPerSquareFoot(prodTyper));
+                    
+
+                    //change state in the order dto
+                    // change tax rate in order dto 
+                    //recalculate everything ...
+                    //recalculate tax and total in DTO 
+       
+                    //MaterialCost = (Area * CostPerSquareFoot)
+                    BigDecimal tempmaterialcost = new BigDecimal(0); 
+                    tempmaterialcost = order.getM_Area().multiply(order.getM_CostPerSquareFoot()); 
+                    order.setM_MaterialCost(tempmaterialcost);
+                                    
+                    //LaborCost = (Area * LaborCostPerSquareFoot)
+                    BigDecimal templaborcost = new BigDecimal(0); 
+                    templaborcost = order.getM_Area().multiply(order.getM_LaborCostPerSquareFoot()); 
+                    order.setM_LaborCost(templaborcost);
+                    
+                    //Tax = (MaterialCost + LaborCost) * (TaxRate/100)
+                    BigDecimal temptaxcost = new BigDecimal(0); 
+                    temptaxcost = order.getM_MaterialCost().add(order.getM_LaborCost()); 
+                    temptaxcost = temptaxcost.multiply(order.getM_TaxRate());
+                    temptaxcost = temptaxcost.divide(new BigDecimal("100").setScale(2, RoundingMode.HALF_UP));
+                    order.setM_Tax(temptaxcost);
+                    
+                    //Total = (MaterialCost + LaborCost + Tax)
+                    BigDecimal temptotal = new BigDecimal(0); 
+                    temptotal = order.getM_MaterialCost().add(order.getM_LaborCost()); 
+                    temptotal = temptotal.add(order.getM_Tax()); 
+                    order.setM_Total(temptotal);  
+                    
+                    // will change your tax rate 
+                    //call state 
+            }
+                    
+    
+                    
+                    
+                    
                     
                     // prompt user for product type 
                     // check if type exists -1 

@@ -58,7 +58,18 @@ public class ServiceImpl implements Service {
         }
         return list;
     }
-
+          public String getProductsInfoList()
+          {
+              return m_prod.getProductsInfoList();
+          }
+               public BigDecimal getCostPerSquareFoot(String item)
+               {
+                   return m_prod.getCostPerSquareFoot(item);
+               }
+               public BigDecimal getLaborCostPerSquareFoot(String item)
+               {
+                   return m_prod.getLaborCostPerSquareFoot(item);
+               }
  public String getTaxesInfoList()
  {
      return m_taxes.getTaxesInfoList();

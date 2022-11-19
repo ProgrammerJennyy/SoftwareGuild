@@ -22,6 +22,11 @@ public interface Service {
     public OrderDTO Edit(Integer choice);
       public BigDecimal getM_TaxRate(String item);
       public String getTaxesInfoList();
+          public String getProductsInfoList();
+               public BigDecimal getCostPerSquareFoot(String item);
+               public BigDecimal getLaborCostPerSquareFoot(String item);
+
+
 
     public String Remove(String choice);    
 }
