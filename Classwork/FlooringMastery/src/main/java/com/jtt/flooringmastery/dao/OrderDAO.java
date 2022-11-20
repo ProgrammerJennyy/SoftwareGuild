@@ -7,6 +7,7 @@ package com.jtt.flooringmastery.dao;
 import com.jtt.flooringmastery.dto.OrderDTO;
 
 import java.io.File;
+import java.io.FileWriter;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -56,7 +57,7 @@ public class OrderDAO {
     
      public void AddOrderDTO(OrderDTO val)
      {
-         m_list.add(val); 
+        m_list.add(val); 
          RebuildDailyOrdersList(); 
      }
     
@@ -134,9 +135,72 @@ public class OrderDAO {
         notfound.setM_OrderNumber(-1);
         return notfound;
     }
+    public void SaveFile(String filename) {
+        String delimeter=",";
+        try {
+            FileWriter mywriter = new FileWriter(filename);
+          String format="%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s\n";
+          String header = String.format(format,
+                       "OrderNumber",
+                       "CustomerName",
+                       "State", 
+                       "TaxRate", 
+                       "ProductType", 
+                       "Area", 
+                       "CostPerSquareFoot",
+                       "LaborCostPerSquareFoot",
+                       "MaterialCost",
+                       "LaborCost",
+                       "Tax",
+                       "Total"); 
+             mywriter.write(header);
+       String[] temp= new String[14];
+        for (int i = 0; i < m_list.size(); i++) {
+            OrderDTO data = m_list.get(i);
 
+            temp[0] = data.getM_OrderNumber().toString();
+            temp[1] = data.getM_CustomerName();
+            temp[2] = data.getM_State();
+            temp[3] = data.getM_TaxRate().toString();
+            temp[4] = data.getM_ProductType().toString();
+            temp[5] = data.getM_Area().toString();
+            temp[6] = data.getM_CostPerSquareFoot().toString();
+            temp[7] = data.getM_LaborCostPerSquareFoot().toString();
+            temp[8] = data.getM_MaterialCost().toString();
+            temp[9] = data.getM_LaborCost().toString();
+            temp[10] = data.getM_Tax().toString();
+            temp[11] = data.getM_Total().toString();
+            
+            String oneOrder = String.format(format,
+            temp[0],temp[1], temp[2], temp[3], temp[4],temp[5],temp[6],temp[7], temp[8],temp[9],temp[10],temp[11]);        
+             mywriter.write(oneOrder);
+                
+         }
+            mywriter.close();
+        } // end try
+        catch (Exception x) {
+
+        }
+    }
     private void RebuildDailyOrdersList() {
-        m_Orders= "OrderNumber 	CustomerName 	State 	TaxRate 	ProductType 	Area 	CostPerSquareFoot 	LaborCostPerSquareFoot 	MaterialCost 	LaborCost 	Tax 	Total\n";
+        
+          String format="%15s  %15s  %15s  %15s  %15s  %15s  %22s  %22s  %22s  %15s  %15s  %15s\n";
+               m_Orders = String.format(format,
+                       "OrderNumber",
+                       "CustomerName",
+                       "State", 
+                       "TaxRate", 
+                       "ProductType", 
+                       "Area", 
+                       "CostPerSquareFoot",
+                       "LaborCostPerSquareFoot",
+                       "MaterialCost",
+                       "LaborCost",
+                       "Tax",
+                       "Total"
+                       
+               );   
+                     
         String[] temp= new String[14];
         for (int i = 0; i < m_list.size(); i++) {
             OrderDTO data = m_list.get(i);
@@ -153,11 +217,10 @@ public class OrderDAO {
             temp[9] = data.getM_LaborCost().toString();
             temp[10] = data.getM_Tax().toString();
             temp[11] = data.getM_Total().toString();
-            m_Orders += temp[0] + " \t" + temp[1] + " \t" + temp[2]
-                    + " \t" + temp[3] + " \t" + temp[4] + " \t" + temp[5]
-                    + " \t" + temp[6] + " \t" + temp[7] + " \t" + temp[8]
-                    + " \t" + temp[9] + " \t" + temp[10] + " \t" + temp[11]
-                    + "\n";
-        }
+            
+            m_Orders += String.format(format,
+            temp[0],temp[1], temp[2], temp[3], temp[4],temp[5],temp[6],temp[7], temp[8],temp[9],temp[10],temp[11]);        
+                 
+         }
     }
 }

@@ -119,5 +119,42 @@ private BigDecimal m_Total;
     public void setM_Total(BigDecimal m_Total) {
         this.m_Total = m_Total;
     }
-
+    public String Show()
+    {
+        String format="%15s  %15s  %15s  %15s  %15s  %15s  %22s  %22s  %22s  %15s  %15s  %15s\n";
+              String order = String.format(format,
+                       "OrderNumber",
+                       "CustomerName",
+                       "State", 
+                       "TaxRate", 
+                       "ProductType", 
+                       "Area", 
+                       "CostPerSquareFoot",
+                       "LaborCostPerSquareFoot",
+                       "MaterialCost",
+                       "LaborCost",
+                       "Tax",
+                       "Total"
+                       
+               );  
+          String[] temp= new String[14];
+             temp[0] = getM_OrderNumber().toString();
+            temp[1] = getM_CustomerName();
+            temp[2] = getM_State();
+            temp[3] = getM_TaxRate().toString();
+            temp[4] = getM_ProductType().toString();
+            temp[5] = getM_Area().toString();
+            temp[6] = getM_CostPerSquareFoot().toString();
+            temp[7] = getM_LaborCostPerSquareFoot().toString();
+            temp[8] = getM_MaterialCost().toString();
+            temp[9] = getM_LaborCost().toString();
+            temp[10] = getM_Tax().toString();
+            temp[11] = getM_Total().toString();
+            
+            order += String.format(format,
+            temp[0],temp[1], temp[2], temp[3], temp[4],temp[5],temp[6],temp[7], temp[8],temp[9],temp[10],temp[11]); 
+              
+              return order;
+    }
+    
 }

@@ -64,9 +64,96 @@ public class Controller {
     }
 
     private void Add() {
-        m_service.Add();
-        
-        
+        // m_service.Add();
+        OrderDTO order = new OrderDTO();
+        String completeOrder="Np";
+            // get date in future
+            m_sDate = m_view.GetDisplay();
+            // is it existing or new data file.
+            // get a customer name
+            m_view.ShowString("Enter  Customer Name");
+            order.setM_CustomerName(m_view.GetString());
+
+            // get a state
+            {
+                //State;                
+                BigDecimal tr = new BigDecimal(-1);
+                BigDecimal invalidnum = new BigDecimal(-1);
+
+                String stateInput = "";
+                //prompt user to change state 
+                do {
+                    m_view.ShowString(m_service.getTaxesInfoList());
+                    m_view.ShowString("Enter  State Abbreviation");
+                    stateInput = m_view.GetString();
+                    tr = m_service.getM_TaxRate(stateInput);
+                    //check state for -1 (if we can find one) tax rate..
+                } while (tr.equals(invalidnum));
+                order.setM_State(stateInput);
+                order.setM_TaxRate(tr);
+            }
+            // get a prod type
+            {
+                BigDecimal tr = new BigDecimal(-1);
+                BigDecimal invalidnum = new BigDecimal(-1);
+
+                String prodTyper = "";
+                //prompt user to change type 
+                do {
+                    m_view.ShowString(m_service.getProductsInfoList());
+                    m_view.ShowString("Please Enter the product type");
+                    prodTyper = m_view.GetString();
+                    tr = m_service.getCostPerSquareFoot(prodTyper);
+                    //check for -1 (if we can find one) product type cost per sq ft 
+                } while (tr.equals(invalidnum));
+                order.setM_ProductType(prodTyper);
+                order.setM_CostPerSquareFoot(tr);
+                order.setM_LaborCostPerSquareFoot(m_service.getLaborCostPerSquareFoot(prodTyper));
+            }
+            // get an area
+            {
+                  //m_view.ShowString("Enter Updated Area");
+                                     //getbigdecimal 
+                    order.setM_Area(m_view.GetBigDecimal());
+                                          
+             }
+            // generate order #
+            order.setM_OrderNumber(33);
+            // do calcs
+//MaterialCost = (Area * CostPerSquareFoot)
+                    BigDecimal tempmaterialcost = new BigDecimal(0); 
+                    tempmaterialcost = order.getM_Area().multiply(order.getM_CostPerSquareFoot()); 
+                    order.setM_MaterialCost(tempmaterialcost);
+                                    
+                    //LaborCost = (Area * LaborCostPerSquareFoot)
+                    BigDecimal templaborcost = new BigDecimal(0); 
+                    templaborcost = order.getM_Area().multiply(order.getM_LaborCostPerSquareFoot()); 
+                    order.setM_LaborCost(templaborcost);
+                    
+                    //Tax = (MaterialCost + LaborCost) * (TaxRate/100)
+                    BigDecimal temptaxcost = new BigDecimal(0); 
+                    temptaxcost = order.getM_MaterialCost().add(order.getM_LaborCost()); 
+                    temptaxcost = temptaxcost.multiply(order.getM_TaxRate());
+                    temptaxcost = temptaxcost.divide(new BigDecimal("100").setScale(2, RoundingMode.HALF_UP));
+                    order.setM_Tax(temptaxcost);
+                    
+                    //Total = (MaterialCost + LaborCost + Tax)
+                    BigDecimal temptotal = new BigDecimal(0); 
+                    temptotal = order.getM_MaterialCost().add(order.getM_LaborCost()); 
+                    temptotal = temptotal.add(order.getM_Tax()); 
+                    order.setM_Total(temptotal);  
+                    
+                    // SHOW THE ORDER
+                    m_view.ShowString(order.Show());
+                    // ASK TO KEEP
+                    m_view.ShowString("Do you want complete the Order?(YES/No)");
+                    completeOrder= m_view.GetString();
+                    if(completeOrder.equalsIgnoreCase("YES"))
+                    {
+                    m_service.AddOrderDTO(order);
+                    String mylist = m_service.Display();
+                    m_view.ShowString(mylist);
+                    }
         
         
         
@@ -183,9 +270,7 @@ int choice =0;
                 case 4:
                 {
                     //Area
-                    //prompt user
-                    m_view.ShowString("Enter Updated Area");
-                    
+                   
                     //getbigdecimal 
                     order.setM_Area(m_view.GetBigDecimal());
                                                                         
