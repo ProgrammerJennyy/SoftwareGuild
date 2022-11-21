@@ -42,8 +42,7 @@ public class ServiceImpl implements Service {
       }
     public String Display(String val)
     {
-        String filenameprod="Orders\\Orders_"+val+".txt";
-        this.m_order.LoadFile(filenameprod, ",");
+        this.m_order.LoadFile(val, ",");
         String list=m_order.getAllOrdersInfoList();
         if(list.length()<5){
             list="Date Contains no orders.";
@@ -80,9 +79,7 @@ public class ServiceImpl implements Service {
     }
 
 
-    public void Add(){
-    }
-    
+
      public void AddOrderDTO(OrderDTO val){
          
          m_order.AddOrderDTO(val);

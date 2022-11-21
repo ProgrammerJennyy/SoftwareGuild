@@ -17,8 +17,7 @@ import java.math.BigDecimal;
 public interface Service {
    public String Display(String val);
    public String Display(); 
-    public void Add();
-    public void AddOrderDTO(OrderDTO val); 
+    public void AddOrderDTO(OrderDTO val);
     public OrderDTO Edit(Integer choice);
       public BigDecimal getM_TaxRate(String item);
       public String getTaxesInfoList();

@@ -69,6 +69,7 @@ public class Controller {
         String completeOrder="Np";
             // get date in future
             m_sDate = m_view.GetDisplay();
+            order.setM_orderDate(m_sDate);
             // is it existing or new data file.
             // get a customer name
             m_view.ShowString("Enter  Customer Name");
@@ -118,7 +119,7 @@ public class Controller {
                                           
              }
             // generate order #
-            order.setM_OrderNumber(33);
+            order.setM_OrderNumber(-1); // fix when saving in DAO
             // do calcs
 //MaterialCost = (Area * CostPerSquareFoot)
                     BigDecimal tempmaterialcost = new BigDecimal(0); 
@@ -325,6 +326,7 @@ int choice =0;
         
 }
     private void Remove() {
+        m_sDate = m_view.GetDisplay();
         String list = m_service.Display(m_sDate);
         m_view.ShowString(list);
         m_view.ShowString("Enter number to remove");

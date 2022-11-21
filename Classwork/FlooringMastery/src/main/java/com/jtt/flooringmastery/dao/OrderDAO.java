@@ -36,17 +36,19 @@ public class OrderDAO {
 
     public String Remove(String choice) {
         String result = "Order " + choice + " was not found";
+        String thedate = "";
         try {
             int ichoice = Integer.parseInt(choice);
             for (int i = 0; i < m_list.size(); i++) {
                 OrderDTO data = m_list.get(i);
                 if (ichoice == data.getM_OrderNumber()) {
+                    thedate=data.getM_orderDate();
                     m_list.remove(i);
                     result="Order removed\n";
                     RebuildDailyOrdersList();
                     result+=m_Orders;
-                    
                     // call save here
+                    SaveFile(thedate);
                 }
             }
         } catch (Exception e) {
@@ -57,15 +59,19 @@ public class OrderDAO {
     
      public void AddOrderDTO(OrderDTO val)
      {
-        m_list.add(val); 
-         RebuildDailyOrdersList(); 
+         String filenameprod=val.getM_orderDate();
+         LoadFile(filenameprod,",");
+         m_list.add(val);
+         RebuildDailyOrdersList();
+         SaveFile(filenameprod);
      }
     
 
     //Needs to Not be part of the interface and ONLY happen in this class
-    public void LoadFile(String filename, String delimeter) {
+    public void LoadFile(String filenameDate, String delimeter) {
         try {
-            File myfile = new File(filename);
+            String filename="Orders\\Orders_"+filenameDate+".txt";
+             File myfile = new File(filename);
             m_Filename = filename;
             m_list.clear();
             m_Orders = "";
@@ -73,6 +79,7 @@ public class OrderDAO {
             int counter = 0;
             while (readFile.hasNextLine()) {
                 OrderDTO data = new OrderDTO();
+                data.setM_orderDate(filenameDate);
                 String row;
                 row = readFile.nextLine();
                 String temp[] = row.split(delimeter);
@@ -135,9 +142,10 @@ public class OrderDAO {
         notfound.setM_OrderNumber(-1);
         return notfound;
     }
-    public void SaveFile(String filename) {
+    public void SaveFile(String filenameDate) {
         String delimeter=",";
         try {
+            String filename="Orders\\Orders_"+filenameDate+".txt";
             FileWriter mywriter = new FileWriter(filename);
           String format="%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s\n";
           String header = String.format(format,
@@ -155,9 +163,18 @@ public class OrderDAO {
                        "Total"); 
              mywriter.write(header);
        String[] temp= new String[14];
+       int LargestOrderNumber=0;
         for (int i = 0; i < m_list.size(); i++) {
             OrderDTO data = m_list.get(i);
-
+            if(data.getM_OrderNumber()>LargestOrderNumber)
+            {
+                LargestOrderNumber=data.getM_OrderNumber();
+            }
+            {
+                data.setM_OrderNumber(LargestOrderNumber+1);
+                LargestOrderNumber++;
+                RebuildDailyOrdersList();
+            }
             temp[0] = data.getM_OrderNumber().toString();
             temp[1] = data.getM_CustomerName();
             temp[2] = data.getM_State();

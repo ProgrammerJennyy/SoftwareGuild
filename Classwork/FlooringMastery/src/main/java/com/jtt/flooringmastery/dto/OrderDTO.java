@@ -24,6 +24,16 @@ private BigDecimal m_LaborCost;
 private BigDecimal m_Tax;
 private BigDecimal m_Total;
 
+    public String getM_orderDate() {
+        return m_orderDate;
+    }
+
+    public void setM_orderDate(String m_orderDate) {
+        this.m_orderDate = m_orderDate;
+    }
+
+    private String m_orderDate;
+
     public Integer getM_OrderNumber() {
         return m_OrderNumber;
     }
