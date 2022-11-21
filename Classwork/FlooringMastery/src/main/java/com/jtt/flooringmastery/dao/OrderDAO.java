@@ -170,7 +170,7 @@ public class OrderDAO {
             {
                 LargestOrderNumber=data.getM_OrderNumber();
             }
-            {
+            if(data.getM_OrderNumber()==-1){
                 data.setM_OrderNumber(LargestOrderNumber+1);
                 LargestOrderNumber++;
                 RebuildDailyOrdersList();
