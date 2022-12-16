@@ -11,7 +11,11 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
+import java.text.ParseException;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
 /**
  *
  * @author Jenny
@@ -62,13 +66,43 @@ public class Controller {
         String mylist = m_service.Display(m_sDate);
         m_view.ShowString(mylist);
     }
-
+    private boolean CheckDate(String val)
+    {
+        boolean validDate=false;
+        // valid date?
+        SimpleDateFormat dateForm = new SimpleDateFormat("MMddyyyy");
+        dateForm.setLenient(false);
+        try {
+            dateForm.parse(val.trim());
+            validDate=true;
+        } catch (ParseException ex) {
+            validDate=false;
+        }
+        // in future
+        if(validDate)
+        {
+            LocalDate today = LocalDate.now();
+              DateTimeFormatter formating = DateTimeFormatter.ofPattern("MMddyyyy");
+            LocalDate val_date = LocalDate.parse(val, formating);
+           if( today.compareTo(val_date)<0)
+           {
+               validDate=true;
+           }
+           else
+           {
+               validDate=false;
+           }
+        }
+        return validDate;
+    }
     private void Add() {
         // m_service.Add();
         OrderDTO order = new OrderDTO();
         String completeOrder="Np";
             // get date in future
-            m_sDate = m_view.GetDisplay();
+            do{
+                m_sDate = m_view.GetDisplay();
+            }while(!CheckDate(m_sDate));
             order.setM_orderDate(m_sDate);
             // is it existing or new data file.
             // get a customer name

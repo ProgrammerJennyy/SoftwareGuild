@@ -62,7 +62,7 @@ public class view {
     
     public String GetDisplay()
     {
-        System.out.println("Please Enter a date to display:MMDDYYY:");
+        System.out.println("Please enter a date MMDDYYYY:");
        return  m_userio.GetString();
     }
     public String GetString()
