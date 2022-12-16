@@ -75,7 +75,7 @@ public class Controller {
             m_view.ShowString("Enter  Customer Name");
             order.setM_CustomerName(m_view.GetString());
 
-            // get a state
+            // get a state - refactor into private method
             {
                 //State;                
                 BigDecimal tr = new BigDecimal(-1);
@@ -93,7 +93,7 @@ public class Controller {
                 order.setM_State(stateInput);
                 order.setM_TaxRate(tr);
             }
-            // get a prod type
+            // get a prod type - refactor into private method
             {
                 BigDecimal tr = new BigDecimal(-1);
                 BigDecimal invalidnum = new BigDecimal(-1);
@@ -111,16 +111,16 @@ public class Controller {
                 order.setM_CostPerSquareFoot(tr);
                 order.setM_LaborCostPerSquareFoot(m_service.getLaborCostPerSquareFoot(prodTyper));
             }
-            // get an area
+            // get an area - refactor into private method
             {
                   //m_view.ShowString("Enter Updated Area");
                                      //getbigdecimal 
                     order.setM_Area(m_view.GetBigDecimal());
                                           
              }
-            // generate order #
+            // generate order # - refactor into private method
             order.setM_OrderNumber(-1); // fix when saving in DAO
-            // do calcs
+            // do calcs - refactor into private method
 //MaterialCost = (Area * CostPerSquareFoot)
                     BigDecimal tempmaterialcost = new BigDecimal(0); 
                     tempmaterialcost = order.getM_Area().multiply(order.getM_CostPerSquareFoot()); 
