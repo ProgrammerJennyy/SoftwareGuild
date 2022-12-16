@@ -24,7 +24,7 @@ public interface Service {
           public String getProductsInfoList();
                public BigDecimal getCostPerSquareFoot(String item);
                public BigDecimal getLaborCostPerSquareFoot(String item);
-
+     public String DisplayOrder(OrderDTO order);
 
 
     public String Remove(String choice);    

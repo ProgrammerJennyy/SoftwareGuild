@@ -40,6 +40,44 @@ public class ServiceImpl implements Service {
           this.m_prod=prod;
           this.m_taxes=taxes;
       }
+      
+    public String DisplayOrder(OrderDTO data)
+    {
+          String retVal="";
+          String format="%15s  %15s  %15s  %15s  %15s  %15s  %22s  %22s  %22s  %15s  %15s  %15s\n";
+               retVal = String.format(format,
+                       "OrderNumber",
+                       "CustomerName",
+                       "State", 
+                       "TaxRate", 
+                       "ProductType", 
+                       "Area", 
+                       "CostPerSquareFoot",
+                       "LaborCostPerSquareFoot",
+                       "MaterialCost",
+                       "LaborCost",
+                       "Tax",
+                       "Total"
+                       
+               );   
+         String[] temp= new String[14];
+            temp[0] = data.getM_OrderNumber().toString();
+            temp[1] = data.getM_CustomerName();
+            temp[2] = data.getM_State();
+            temp[3] = data.getM_TaxRate().toString();
+            temp[4] = data.getM_ProductType().toString();
+            temp[5] = data.getM_Area().toString();
+            temp[6] = data.getM_CostPerSquareFoot().toString();
+            temp[7] = data.getM_LaborCostPerSquareFoot().toString();
+            temp[8] = data.getM_MaterialCost().toString();
+            temp[9] = data.getM_LaborCost().toString();
+            temp[10] = data.getM_Tax().toString();
+            temp[11] = data.getM_Total().toString();
+            
+            retVal += String.format(format,
+            temp[0],temp[1], temp[2], temp[3], temp[4],temp[5],temp[6],temp[7], temp[8],temp[9],temp[10],temp[11]);        
+          return retVal;
+    }
     public String Display(String val)
     {
         this.m_order.LoadFile(val, ",");

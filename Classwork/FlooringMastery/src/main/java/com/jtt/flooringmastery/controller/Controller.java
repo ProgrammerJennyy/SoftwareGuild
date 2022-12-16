@@ -189,30 +189,30 @@ public class Controller {
                     String mylist = m_service.Display();
                     m_view.ShowString(mylist);
                     }
-        
-        
-        
+    
     }
 
     private void Edit() {
         m_sDate = m_view.GetDisplay();
         String mylist = m_service.Display(m_sDate);
         m_view.ShowString(mylist);
-        Integer choice = m_view.GetOrderInteger();
-
-        OrderDTO edited = m_service.Edit(choice);
-        if (edited.getM_OrderNumber() == -1) {
-
-        //invalid choice       
-        } else {
-            editOrderDTO(edited);
-          
+        if (mylist.length() > 30) {
+            Integer choice = m_view.GetOrderInteger();
+            OrderDTO edited = m_service.Edit(choice);
+            if (edited.getM_OrderNumber() == -1) {
+                //invalid choice       
+            } else {
+                editOrderDTO(edited);
+            }
         }
-
     }
 private void editOrderDTO(OrderDTO order){
 int choice =0;
     do {
+            String currOrder="";
+            // service layer stuff
+            currOrder=m_service.DisplayOrder(order);
+            m_view.ShowString(currOrder);
             m_view.GetEditChoice(); 
             choice = m_view.GetSelection();
             switch (choice) {
@@ -363,10 +363,12 @@ int choice =0;
         m_sDate = m_view.GetDisplay();
         String list = m_service.Display(m_sDate);
         m_view.ShowString(list);
-        m_view.ShowString("Enter number to remove");
-        String choice = m_view.GetString();
-        String result = m_service.Remove(choice);
-        m_view.ShowString(result);
+        if (list.length() > 30) {
+            m_view.ShowString("Enter number to remove");
+            String choice = m_view.GetString();
+            String result = m_service.Remove(choice);
+            m_view.ShowString(result);
+        }
     }
 
     private BigDecimal BigDecimal(int i) {
