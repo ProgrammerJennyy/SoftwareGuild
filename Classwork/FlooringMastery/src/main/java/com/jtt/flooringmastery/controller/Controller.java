@@ -95,6 +95,33 @@ public class Controller {
         }
         return validDate;
     }
+    private OrderDTO doCalculations(OrderDTO order)
+    {
+          //MaterialCost = (Area * CostPerSquareFoot)
+                    BigDecimal tempmaterialcost = new BigDecimal(0); 
+                    tempmaterialcost = order.getM_Area().multiply(order.getM_CostPerSquareFoot()); 
+                    order.setM_MaterialCost(tempmaterialcost);
+                                    
+                    //LaborCost = (Area * LaborCostPerSquareFoot)
+                    BigDecimal templaborcost = new BigDecimal(0); 
+                    templaborcost = order.getM_Area().multiply(order.getM_LaborCostPerSquareFoot()); 
+                    order.setM_LaborCost(templaborcost);
+                    
+                    //Tax = (MaterialCost + LaborCost) * (TaxRate/100)
+                    BigDecimal temptaxcost = new BigDecimal(0); 
+                    temptaxcost = order.getM_MaterialCost().add(order.getM_LaborCost()); 
+                    temptaxcost = temptaxcost.multiply(order.getM_TaxRate());
+                    temptaxcost = temptaxcost.divide(new BigDecimal("100").setScale(2, RoundingMode.HALF_UP));
+                    order.setM_Tax(temptaxcost);
+                    
+                    //Total = (MaterialCost + LaborCost + Tax)
+                    BigDecimal temptotal = new BigDecimal(0); 
+                    temptotal = order.getM_MaterialCost().add(order.getM_LaborCost()); 
+                    temptotal = temptotal.add(order.getM_Tax()); 
+                    order.setM_Total(temptotal); 
+                    return order;
+    }
+    
     private void Add() {
         // m_service.Add();
         OrderDTO order = new OrderDTO();
@@ -155,28 +182,7 @@ public class Controller {
             // generate order # - refactor into private method
             order.setM_OrderNumber(-1); // fix when saving in DAO
             // do calcs - refactor into private method
-//MaterialCost = (Area * CostPerSquareFoot)
-                    BigDecimal tempmaterialcost = new BigDecimal(0); 
-                    tempmaterialcost = order.getM_Area().multiply(order.getM_CostPerSquareFoot()); 
-                    order.setM_MaterialCost(tempmaterialcost);
-                                    
-                    //LaborCost = (Area * LaborCostPerSquareFoot)
-                    BigDecimal templaborcost = new BigDecimal(0); 
-                    templaborcost = order.getM_Area().multiply(order.getM_LaborCostPerSquareFoot()); 
-                    order.setM_LaborCost(templaborcost);
-                    
-                    //Tax = (MaterialCost + LaborCost) * (TaxRate/100)
-                    BigDecimal temptaxcost = new BigDecimal(0); 
-                    temptaxcost = order.getM_MaterialCost().add(order.getM_LaborCost()); 
-                    temptaxcost = temptaxcost.multiply(order.getM_TaxRate());
-                    temptaxcost = temptaxcost.divide(new BigDecimal("100").setScale(2, RoundingMode.HALF_UP));
-                    order.setM_Tax(temptaxcost);
-                    
-                    //Total = (MaterialCost + LaborCost + Tax)
-                    BigDecimal temptotal = new BigDecimal(0); 
-                    temptotal = order.getM_MaterialCost().add(order.getM_LaborCost()); 
-                    temptotal = temptotal.add(order.getM_Tax()); 
-                    order.setM_Total(temptotal);  
+                 order = doCalculations( order);
                     
                     // SHOW THE ORDER
                     m_view.ShowString(order.Show());
@@ -239,20 +245,7 @@ int choice =0;
                     }while(tr.equals(invalidnum));
                     order.setM_State(stateInput);
                     order.setM_TaxRate(tr);
-
-                                     
-                    //Tax = (MaterialCost + LaborCost) * (TaxRate/100)
-                    BigDecimal temptaxcost = new BigDecimal(0); 
-                    temptaxcost = order.getM_MaterialCost().add(order.getM_LaborCost()); 
-                    temptaxcost = temptaxcost.multiply(order.getM_TaxRate());
-                    temptaxcost = temptaxcost.divide(new BigDecimal("100").setScale(2, RoundingMode.HALF_UP));
-                    order.setM_Tax(temptaxcost);
-                    
-                    //Total = (MaterialCost + LaborCost + Tax)
-                    BigDecimal temptotal = new BigDecimal(0); 
-                    temptotal = order.getM_MaterialCost().add(order.getM_LaborCost()); 
-                    temptotal = temptotal.add(order.getM_Tax()); 
-                    order.setM_Total(temptotal);  
+                    order=doCalculations(order); 
                     
                     // will change your tax rate 
                     //call state 
@@ -268,78 +261,25 @@ int choice =0;
                    String prodTyper="";
                    //prompt user to change type 
                    do{
-                    m_view.ShowString(m_service.getProductsInfoList());
-                    m_view.ShowString("Please Enter the product type");
-                    prodTyper = m_view.GetString(); 
-                    tr=m_service.getCostPerSquareFoot(prodTyper);
-                    //check for -1 (if we can find one) product type cost per sq ft 
+                        m_view.ShowString(m_service.getProductsInfoList());
+                        m_view.ShowString("Please Enter the product type");
+                        prodTyper = m_view.GetString(); 
+                        tr=m_service.getCostPerSquareFoot(prodTyper);
+                        //check for -1 (if we can find one) product type cost per sq ft 
                     }while(tr.equals(invalidnum));
                     order.setM_ProductType(prodTyper);
                     order.setM_CostPerSquareFoot(tr);
                     order.setM_LaborCostPerSquareFoot(m_service.getLaborCostPerSquareFoot(prodTyper));
-                   
-                    //MaterialCost = (Area * CostPerSquareFoot)
-                    BigDecimal tempmaterialcost = new BigDecimal(0); 
-                    tempmaterialcost = order.getM_Area().multiply(order.getM_CostPerSquareFoot()); 
-                    order.setM_MaterialCost(tempmaterialcost);
-                                    
-                    //LaborCost = (Area * LaborCostPerSquareFoot)
-                    BigDecimal templaborcost = new BigDecimal(0); 
-                    templaborcost = order.getM_Area().multiply(order.getM_LaborCostPerSquareFoot()); 
-                    order.setM_LaborCost(templaborcost);
-                    
-                    //Tax = (MaterialCost + LaborCost) * (TaxRate/100)
-                    BigDecimal temptaxcost = new BigDecimal(0); 
-                    temptaxcost = order.getM_MaterialCost().add(order.getM_LaborCost()); 
-                    temptaxcost = temptaxcost.multiply(order.getM_TaxRate());
-                    temptaxcost = temptaxcost.divide(new BigDecimal("100").setScale(2, RoundingMode.HALF_UP));
-                    order.setM_Tax(temptaxcost);
-                    
-                    //Total = (MaterialCost + LaborCost + Tax)
-                    BigDecimal temptotal = new BigDecimal(0); 
-                    temptotal = order.getM_MaterialCost().add(order.getM_LaborCost()); 
-                    temptotal = temptotal.add(order.getM_Tax()); 
-                    order.setM_Total(temptotal);  
-                    
-                                }
+                    order=doCalculations(order); 
+                   }
                 break;
                 case 4:
                 {
                     //Area
-                   
                     //getbigdecimal 
                     order.setM_Area(m_view.GetBigDecimal());
-                                                                        
-                    
                     //recaluclations - cost - tax 
-                                                                   
-                    //MaterialCost = (Area * CostPerSquareFoot)
-                    BigDecimal tempmaterialcost = new BigDecimal(0); 
-                    tempmaterialcost = order.getM_Area().multiply(order.getM_CostPerSquareFoot()); 
-                    order.setM_MaterialCost(tempmaterialcost);
-                                    
-                    //LaborCost = (Area * LaborCostPerSquareFoot)
-                    BigDecimal templaborcost = new BigDecimal(0); 
-                    templaborcost = order.getM_Area().multiply(order.getM_LaborCostPerSquareFoot()); 
-                    order.setM_LaborCost(templaborcost);
-                         
-                    //Tax = (MaterialCost + LaborCost) * (TaxRate/100)
-                    BigDecimal temptaxcost = new BigDecimal(0); 
-                    temptaxcost = order.getM_MaterialCost().add(order.getM_LaborCost()); 
-                    temptaxcost = temptaxcost.multiply(order.getM_TaxRate());
-                    temptaxcost = temptaxcost.divide(new BigDecimal("100").setScale(2, RoundingMode.HALF_UP));
-                    order.setM_Tax(temptaxcost);
-                                                        
-                    //Tax rates are stored as whole numbers
-                    
-
-                    //Total = (MaterialCost + LaborCost + Tax)
-                    BigDecimal temptotal = new BigDecimal(0); 
-                    temptotal = order.getM_MaterialCost().add(order.getM_LaborCost()); 
-                    temptotal = temptotal.add(order.getM_Tax()); 
-                    order.setM_Total(temptotal);  
-                    
-                                     
+                    order=doCalculations(order); 
                 }
                     break;
                 case 5:
