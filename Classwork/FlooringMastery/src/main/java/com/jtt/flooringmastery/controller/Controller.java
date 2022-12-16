@@ -200,7 +200,8 @@ public class Controller {
             Integer choice = m_view.GetOrderInteger();
             OrderDTO edited = m_service.Edit(choice);
             if (edited.getM_OrderNumber() == -1) {
-                //invalid choice       
+                //invalid choice 
+                m_view.ShowString("Order not found.");
             } else {
                 editOrderDTO(edited);
             }
