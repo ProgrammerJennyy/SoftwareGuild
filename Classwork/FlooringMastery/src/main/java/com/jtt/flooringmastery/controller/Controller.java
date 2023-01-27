@@ -315,4 +315,29 @@ int choice =0;
     private BigDecimal BigDecimal(int i) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    
+    private void ExampleAddWorkflow(){
+        OrderDTO order = new OrderDTO();
+        //Get Date / Set Property
+        GetDate();
+        //Get Name
+        
+        //Get Product
+        
+        //Get State
+        
+        //Get Area
+        
+        //Calculate
+        
+        //Confirm With User
+        
+        //Save To File
+    }
+    
+    private void GetDate(){
+        //Asks User For Date
+        //Confirms Is valid Date
+        //Returns if so - else repeat
+    }
 }
