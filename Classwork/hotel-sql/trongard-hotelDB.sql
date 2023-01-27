@@ -1,6 +1,3 @@
-DROP DATABASE IF EXISTS  `hotel` ;
-CREATE DATABASE  IF NOT EXISTS `hotel` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
-USE `hotel`;
 -- MySQL dump 10.13  Distrib 8.0.31, for Win64 (x86_64)
 --
 -- Host: localhost    Database: hotel
@@ -33,15 +30,6 @@ CREATE TABLE `amenties` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `amenties`
---
-
-LOCK TABLES `amenties` WRITE;
-/*!40000 ALTER TABLE `amenties` DISABLE KEYS */;
-/*!40000 ALTER TABLE `amenties` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `guests`
 --
 
@@ -49,24 +37,17 @@ DROP TABLE IF EXISTS `guests`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `guests` (
-  `guestId` int NOT NULL,
+  `Name` varchar(75) NOT NULL,
+  `Address` varchar(45) NOT NULL,
   `City` varchar(100) NOT NULL,
   `stateAbbr` varchar(2) NOT NULL,
   `Zip` varchar(10) NOT NULL,
   `Phone` varchar(15) NOT NULL,
+  `guestId` int NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`guestId`),
   UNIQUE KEY `guestId_UNIQUE` (`guestId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `guests`
---
-
-LOCK TABLES `guests` WRITE;
-/*!40000 ALTER TABLE `guests` DISABLE KEYS */;
-/*!40000 ALTER TABLE `guests` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `reservations`
@@ -76,7 +57,6 @@ DROP TABLE IF EXISTS `reservations`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `reservations` (
-  `Reservation` int NOT NULL,
   `roomNumber` int NOT NULL,
   `guestId` int NOT NULL,
   `Adults` int NOT NULL,
@@ -84,22 +64,14 @@ CREATE TABLE `reservations` (
   `startDate` date NOT NULL,
   `endDate` date NOT NULL,
   `totalRoomCost` decimal(10,2) NOT NULL,
+  `Reservation` int NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`Reservation`),
-  KEY `good_guestId_idx` (`guestId`),
   KEY `good_roomId_idx` (`roomNumber`),
-  CONSTRAINT `good_guestId` FOREIGN KEY (`guestId`) REFERENCES `guests` (`guestId`) ON UPDATE RESTRICT,
-  CONSTRAINT `good_roomId` FOREIGN KEY (`roomNumber`) REFERENCES `roomdata` (`roomNumber`) ON UPDATE RESTRICT
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  KEY `good_guestid_idx` (`guestId`),
+  CONSTRAINT `good_guestid` FOREIGN KEY (`guestId`) REFERENCES `guests` (`guestId`),
+  CONSTRAINT `good_roomnumber` FOREIGN KEY (`roomNumber`) REFERENCES `roomdata` (`roomNumber`) ON UPDATE RESTRICT
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `reservations`
---
-
-LOCK TABLES `reservations` WRITE;
-/*!40000 ALTER TABLE `reservations` DISABLE KEYS */;
-/*!40000 ALTER TABLE `reservations` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `roomamenties`
@@ -109,23 +81,16 @@ DROP TABLE IF EXISTS `roomamenties`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `roomamenties` (
-  `amenityId` int NOT NULL,
   `roomNumber` int NOT NULL,
+  `amenityId` int NOT NULL,
+  `index` int NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`index`),
   KEY `good_roomnumberay_idx` (`roomNumber`),
   KEY `good_amenity_hurray_idx` (`amenityId`),
   CONSTRAINT `good_amenity_hurray` FOREIGN KEY (`amenityId`) REFERENCES `amenties` (`amenityId`),
   CONSTRAINT `good_roomnumber_hurray` FOREIGN KEY (`roomNumber`) REFERENCES `roomdata` (`roomNumber`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `roomamenties`
---
-
-LOCK TABLES `roomamenties` WRITE;
-/*!40000 ALTER TABLE `roomamenties` DISABLE KEYS */;
-/*!40000 ALTER TABLE `roomamenties` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `roomdata`
@@ -145,15 +110,6 @@ CREATE TABLE `roomdata` (
   PRIMARY KEY (`roomNumber`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `roomdata`
---
-
-LOCK TABLES `roomdata` WRITE;
-/*!40000 ALTER TABLE `roomdata` DISABLE KEYS */;
-/*!40000 ALTER TABLE `roomdata` ENABLE KEYS */;
-UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -164,4 +120,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-01-26 20:27:50
+-- Dump completed on 2023-01-26 22:06:55
