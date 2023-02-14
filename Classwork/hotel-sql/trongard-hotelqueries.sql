@@ -65,8 +65,6 @@ rd.roomNumber,
 re.Reservation,
 re.startDate,
 re.endDate,
-re.Adults,
-rd.standardOccupancy,
 CASE WHEN (re.Adults - rd.standardOccupancy)>0 -- when there are extra adults
 THEN rd.basePrice*DATEDIFF(re.endDate, re.startDate) + (re.Adults - rd.standardOccupancy)*rd.extraPersonPrice*DATEDIFF(re.endDate, re.startDate) -- add the extra charge per person
  ELSE rd.basePrice*DATEDIFF(re.endDate, re.startDate) END AS totalCost
@@ -90,7 +88,7 @@ rd.maximumOccupancy,
 re.startDate,
 re.endDate
  FROM reservations re
- JOIN roomdata rd
+INNER JOIN roomdata rd
 ON rd.roomNumber = re.roomNumber
 WHERE rd.maximumOccupancy>=3 AND MONTH(re.startDate)=4
 ;
@@ -103,12 +101,11 @@ with the most reservations and then by the guest's last name.
 SELECT
 SUBSTRING_INDEX(gu.Name,' ',-1) AS lastname,
 SUBSTRING_INDEX(gu.Name,' ',1) AS firstname,
- count(re.guestId) guest_number_times
+ count(re.guestId) AS guest_number_times
  FROM reservations re
  inner join guests gu on gu.guestId = re.guestId
 group by re.guestId
-ORDER BY guest_number_times DESC, lastname;
-
+ORDER BY guest_number_times DESC, lastname desc;
 
 /*
 7. Write a query that displays the name, address, and phone number of a guest based on their phone number. (Choose a phon
