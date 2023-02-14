@@ -102,10 +102,10 @@ DROP TABLE IF EXISTS `roomdata`;
 CREATE TABLE `roomdata` (
   `roomNumber` int NOT NULL,
   `roomType` varchar(45) NOT NULL,
-  `standardOccupancy` int unsigned NOT NULL,
-  `maximumOccupancy` int unsigned NOT NULL,
-  `basePrice` decimal(10,2) unsigned NOT NULL,
-  `extraPersonPrice` decimal(10,2) unsigned NOT NULL,
+  `standardOccupancy` int NOT NULL,
+  `maximumOccupancy` int NOT NULL,
+  `basePrice` decimal(10,2) NOT NULL,
+  `extraPersonPrice` decimal(10,2) NOT NULL,
   `adaAccessable` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`roomNumber`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -120,4 +120,4 @@ CREATE TABLE `roomdata` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-01-26 22:06:55
+-- Dump completed on 2023-02-13 19:52:18
