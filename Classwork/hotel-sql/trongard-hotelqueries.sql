@@ -123,3 +123,22 @@ gu.Phone
  FROM reservations re
  inner join guests gu on gu.guestId = re.guestId
 where gu.phone ="(763) 555-1212";
+
+
+
+
+
+/* stuff for deleteing JP */
+use hotel;
+# check for JP's reservations ; 
+#select * from reservations re where re.guestId=(select guestId from guests where name="Jeremiah Pendergrass") ;
+# delete JP's reservations ;  
+# delete from reservations re where re.guestId=(select guestId from guests where name="Jeremiah Pendergrass") ;    
+ # check for JP's reservations 
+#select * from reservations re where re.guestId=(select guestId from guests where name="Jeremiah Pendergrass") ;
+# find JP  customer
+# select * from guests where name="Jeremiah Pendergrass"; 
+# delete JP   
+# delete from guests where name="Jeremiah Pendergrass";
+# JP should be gone.
+# select * from guests where name="Jeremiah Pendergrass";
