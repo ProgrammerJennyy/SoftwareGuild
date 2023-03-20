@@ -34,6 +34,7 @@ public class bullandcowController {
         return retvals;
     }
     @PostMapping("/begin")
+    @ResponseStatus(HttpStatus.CREATED)
     public String begin() {
         bullandcowTurn todo = new bullandcowTurn();
         todo.setSecret(bandcService.CreateSecret());
