@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<!-- Start Style-->
+<style>
+ @media screen and (max-width: 600px) {
+ .container{
+     width: 100%;
+  }
+}  
+
+.table_hover td {
+    background: #daed0ed4;    
+    border-right: solid 1px white ;
+    border-bottom: 1px solid white;
+    text-align: center;
+};
+.container:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+.column_left{
+  float: left;
+  width: 60%;
+}
+.column_right{
+  float: left;
+  width: 40%;
+}
+</style>
+<!-- End Style -->
+<head>
+    <meta charset="UTF-8">
+    <title>Vending Machine</title>
+</head>
+<body>
+    <div class="container">
+        <h1 style="text-align: center;">Vending Machine</h1>
+        <hr>
+        <ul class="list-group" id="errorMessages"></ul>
+        <!-- left container -->
+        <div class="column_left">
+            <!--container for Contact List table -->
+            <div id="contactTableDiv">
+                <table id="contactTable" class="table_hover" style="border: 1px solid rgb(255, 0, 0); padding: 5px; margin-right: 5px; margin-bottom: 5px;">
+                    <thead>
+                        <tr>
+                            <th align="center" width="33%">Items</th>
+                            <th align="center" width="33%">For</th>
+                            <th align="center" width="34%">Sale</th>
+                        </tr>
+                    </thead>
+                        <!-- we will add data rows dynamically to the tbody -->
+                        <tbody id="contentRows"></tbody>
+                </table>
+            </div>
+            <!-- end #contactTableDiv -->
+        </div>
+        <!-- Right Container -->
+        <div class="column_right">
+            <!--  Total Money section -->
+            <h2 >Total $ In</h2> 
+            <div class="moneyEntry">
+                <input type="text"  id="totalMoney" readonly="yes" placeholder="$0.00">
+           </div>
+           <br>
+            <div class="row" style="justify-content: center;">
+                <button type="button" id="addDollar" >Add Dollar</button>
+                <button type="button" id="addQuarter">Add Quarter</button>
+            </div> 
+            <br>
+            <div class="row" style="justify-content: center;">
+                <button type="button" id="addDime" >Add Dime</button>
+                <button type="button" id="addNickel">Add Nickel</button>
+            </div>
+            <!-- Messages Section  -->
+            <h2 >Messages</h2>
+            <input type="text" id="messageDisplay" size="30" readonly="yes">
+            <form>
+                <h2>
+                <label>Item:</label> <input type="text" id="itemSelected">
+                </h2>
+            </form>
+            <button type="button" id="makePurchase">Make Purchase</button>
+            <!-- Make Change Section -->
+            <h2 >Change</h2>
+            <input type="text" id="changeDisplay" size="30" readonly="yes">
+            <br>
+            <button type="button" id="changeReturn">Change Return</button>            
+        </div> <!-- end right column -->
+    </div> <!-- end class container -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <!-- use the the full jQuery build, NOT the slim build-->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+    <!-- custom js files -->
+    <script src="js/home.js"></script>
+</body>
+</html>
