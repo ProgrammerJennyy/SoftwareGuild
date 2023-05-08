@@ -30,7 +30,7 @@ function returnChange(){
     temp-=dms*10; 
     let nick=Math.floor(temp/5);
     temp-=nick*5;
-    let pen=temp;
+    let pen=Math.floor(temp/1);
     updateChangeBox(qrtrs,dms,nick,pen);  
     moneyEntered = 0.00;
     $("#totalMoney").val("$0.00")
@@ -49,9 +49,8 @@ function updateMessage(msg,appendToMsg){
     let temp = $("#messageDisplay");
     if(appendToMsg==false)
     {
-        temp.val(" ");
+        temp.val("");
     }
-    temp.val()
 	temp.val(temp.val() + msg);   
 }
 
