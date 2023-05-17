@@ -104,7 +104,7 @@ function loadContacts() {
           //retrieve and store the values
           var item = contact.id   
                +"<br />     "+contact.name
-               +"<br />     $"+contact.price
+               +"<br />     $"+contact.price.toFixed(2)
                +"<br />    Quantity Left: "+contact.quantity;               
          cellItemForSale.push(item);
         });
