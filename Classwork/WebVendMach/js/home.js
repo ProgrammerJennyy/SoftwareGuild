@@ -108,6 +108,11 @@ function loadContacts() {
                +"<br />    Quantity Left: "+contact.quantity;               
          cellItemForSale.push(item);
         });
+        var item="Sold Out!";
+        for(let i = 9;i>cellItemForSale.length;i--)
+        {
+          cellItemForSale.push(item);
+        }
             // build a table using the retrieved values
             var row = "<tr id=\'abc1\'>";
              row += "<td>" + cellItemForSale[0] + "</td>";
