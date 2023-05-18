@@ -83,7 +83,7 @@ function clearTableCells() {
     cellItemForSale.length=0;
   }
   
-  // load contacts from REST API service to an HTML table
+  // load item from REST API service to an HTML table
 function loadTableCells() {
     clearTableCells();
    
@@ -91,13 +91,13 @@ function loadTableCells() {
     $.ajax({
       type: "GET",
       url: "http://vending.us-east-1.elasticbeanstalk.com/items",
-      success: function (contactArray) {
-        $.each(contactArray, function (index, contact) {
+      success: function (candyItemArray) {
+        $.each(candyItemArray, function (index, candyItem) {
           //retrieve and store the values
-          var item = contact.id   
-               +"<br />     "+contact.name
-               +"<br />     $"+contact.price.toFixed(2)
-               +"<br />    Quantity Left: "+contact.quantity;               
+          var item = candyItem.id   
+               +"<br />     "+candyItem.name
+               +"<br />     $"+candyItem.price.toFixed(2)
+               +"<br />    Quantity Left: "+candyItem.quantity;               
          cellItemForSale.push(item);
         });
         var item="Sold Out!";
