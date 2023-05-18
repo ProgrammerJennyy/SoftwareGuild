@@ -5,9 +5,8 @@ var cellItemForSale = new Array();
 var contentRows = $("#contentRows");
 
 $(document).ready(function () {
-   // addContact();
-   //  updateContact();
-   loadContacts();
+
+   loadTableCells();
    $("#addDollar").on('click', addDollar);
    $("#addQuarter").on('click', addQuarter);
    $("#addDime").on('click', addDime);
@@ -39,15 +38,12 @@ function returnChange(){
 
 
 function updateTotal() {
-	let temp = $("#totalMoney");
-    temp.empty();
-	temp.val("$" + moneyEntered.toFixed(2));
+    $("#totalMoney").val("$" + moneyEntered.toFixed(2));
     $("#changeDisplay").val("");
 }
 
 function updateMessage(msg){
-  let temp = $("#messageDisplay");
-	temp.val( msg);   
+	$("#messageDisplay").val( msg);   
 }
 
 function addDollar() {
@@ -75,7 +71,7 @@ function addNickel() {
 }
 
   // clear Contact table prior to loading/updating data
-function clearContactTable() {
+function clearTableCells() {
     if( cellItemForSale.length>7){
         var tbl = document.getElementById("abc1"); 
         tbl.remove();
@@ -88,8 +84,8 @@ function clearContactTable() {
   }
   
   // load contacts from REST API service to an HTML table
-function loadContacts() {
-    clearContactTable();
+function loadTableCells() {
+    clearTableCells();
    
      // retrieve and display existing data using GET request
     $.ajax({
@@ -142,7 +138,7 @@ function loadContacts() {
     updateMessage("Purchase Successful");
    $("#totalMoney").val("$0.00")
     moneyEntered = 0.00;
-    loadContacts(); 
+    loadTableCells(); 
 
   }
   function failedPurchase(err)
