@@ -34,7 +34,7 @@ function returnChange(){
     updateChangeBox(qrtrs,dms,nick,pen);  
     moneyEntered = 0.00;
     $("#totalMoney").val("$0.00")
-    updateMessage("Change Returned",false);
+    updateMessage("Change Returned");
     }
 
 
@@ -45,37 +45,33 @@ function updateTotal() {
     $("#changeDisplay").val("");
 }
 
-function updateMessage(msg,appendToMsg){
-    let temp = $("#messageDisplay");
-    if(appendToMsg==false)
-    {
-        temp.val("");
-    }
-	temp.val(temp.val() + msg);   
+function updateMessage(msg){
+  let temp = $("#messageDisplay");
+	temp.val( msg);   
 }
 
 function addDollar() {
 	moneyEntered = moneyEntered + 1.00;
 	updateTotal();
-    updateMessage("Added $1.00",false);
+    updateMessage("Added $1.00");
 }
 
 function addQuarter() {
 	moneyEntered += 0.25;
 	updateTotal();
-    updateMessage("Added $0.25",false);
+    updateMessage("Added $0.25");
 }
 
 function addDime() {
 	moneyEntered += 0.10;
 	updateTotal();
-    updateMessage("Added $0.10",false);
+    updateMessage("Added $0.10");
 }
 
 function addNickel() {
 	moneyEntered += 0.05;
 	updateTotal();
-    updateMessage("Added $0.05",false);
+    updateMessage("Added $0.05");
 }
 
   // clear Contact table prior to loading/updating data
@@ -136,14 +132,14 @@ function loadContacts() {
   
       // create error function to display API error messages
       error: function () {
-        updateMessage("Error retrieving Items",false);
+        updateMessage("Error retrieving Items");
       },
     });
   }
 
   function goodPurchase(change){
     updateChangeBox(change.quarters,change.dimes,change.nickels,change.pennies);
-    updateMessage("Purchase Successful",false);
+    updateMessage("Purchase Successful");
    $("#totalMoney").val("$0.00")
     moneyEntered = 0.00;
     loadContacts(); 
@@ -152,7 +148,7 @@ function loadContacts() {
   function failedPurchase(err)
   {
 	let msg = $.parseJSON(err.responseText);
-	updateMessage(msg.message,false);
+	updateMessage(msg.message);
   }
   
   function purchaseItem() {
