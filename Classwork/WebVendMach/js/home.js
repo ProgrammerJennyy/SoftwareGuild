@@ -83,53 +83,56 @@ function clearTableCells() {
     cellItemForSale.length=0;
   }
   
+  function loadCandySuccess(candyItemArray) {
+    $.each(candyItemArray, function (index, candyItem) {
+      //retrieve and store the values
+      var item = candyItem.id   
+           +"<br />     "+candyItem.name
+           +"<br />     $"+candyItem.price.toFixed(2)
+           +"<br />    Quantity Left: "+candyItem.quantity;               
+     cellItemForSale.push(item);
+    });
+    var item="Sold Out!";
+    for(let i = 9;i>cellItemForSale.length;i--)
+    {
+      cellItemForSale.push(item);
+    }
+        // build a table using the retrieved values
+        var row = "<tr id=\'abc1\'>";
+         row += "<td>" + cellItemForSale[0] + "</td>";
+        row += "<td>" + cellItemForSale[1] + "</td>";
+        row +="<td>" + cellItemForSale[2] + "</td>";
+        row += "</tr>";
+        contentRows.append(row);
+         row = "<tr id=\'abc2\'>";
+         row += "<td>" + cellItemForSale[3] + "</td>";
+        row += "<td>" + cellItemForSale[4] + "</td>";
+        row +="<td>" + cellItemForSale[5] + "</td>";
+        row += "</tr>";
+        contentRows.append(row);
+         row = "<tr id=\'abc3\'>";
+        row += "<td>" + cellItemForSale[6] + "</td>";
+       row += "<td>" + cellItemForSale[7] + "</td>";
+       row +="<td>" + cellItemForSale[8] + "</td>";
+       row += "</tr>";
+       contentRows.append(row);
+  }
+  function loadCandyError() {
+    updateMessage("Error retrieving Items");
+  }
+
+
+
   // load item from REST API service to an HTML table
 function loadTableCells() {
     clearTableCells();
-   
-     // retrieve and display existing data using GET request
+    // retrieve and display existing data using GET request
     $.ajax({
       type: "GET",
       url: "http://vending.us-east-1.elasticbeanstalk.com/items",
-      success: function (candyItemArray) {
-        $.each(candyItemArray, function (index, candyItem) {
-          //retrieve and store the values
-          var item = candyItem.id   
-               +"<br />     "+candyItem.name
-               +"<br />     $"+candyItem.price.toFixed(2)
-               +"<br />    Quantity Left: "+candyItem.quantity;               
-         cellItemForSale.push(item);
-        });
-        var item="Sold Out!";
-        for(let i = 9;i>cellItemForSale.length;i--)
-        {
-          cellItemForSale.push(item);
-        }
-            // build a table using the retrieved values
-            var row = "<tr id=\'abc1\'>";
-             row += "<td>" + cellItemForSale[0] + "</td>";
-            row += "<td>" + cellItemForSale[1] + "</td>";
-            row +="<td>" + cellItemForSale[2] + "</td>";
-            row += "</tr>";
-            contentRows.append(row);
-             row = "<tr id=\'abc2\'>";
-             row += "<td>" + cellItemForSale[3] + "</td>";
-            row += "<td>" + cellItemForSale[4] + "</td>";
-            row +="<td>" + cellItemForSale[5] + "</td>";
-            row += "</tr>";
-            contentRows.append(row);
-             row = "<tr id=\'abc3\'>";
-            row += "<td>" + cellItemForSale[6] + "</td>";
-           row += "<td>" + cellItemForSale[7] + "</td>";
-           row +="<td>" + cellItemForSale[8] + "</td>";
-           row += "</tr>";
-           contentRows.append(row);
-      },
-  
-      // create error function to display API error messages
-      error: function () {
-        updateMessage("Error retrieving Items");
-      },
+      success:loadCandySuccess,
+        // create error function to display API error messages
+      error:loadCandyError,
     });
   }
 
