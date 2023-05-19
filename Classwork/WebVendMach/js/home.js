@@ -83,6 +83,28 @@ function clearTableCells() {
     cellItemForSale.length=0;
   }
   
+  // build a td cell string with a button in it.  
+  function makeButton(buttonId){
+     var cellbutton="<td><button  id=\"itemCandyButton"+buttonId+"\" ";
+     cellbutton+="style=\"border: none;background: #daed0ed4;\""
+     cellbutton+= ">" + cellItemForSale[buttonId] + "</button></td>";
+    return cellbutton;
+  }
+
+function makeButtonCallbacks()
+{
+  // for each item from REST call make a button on click.
+  $.each(cellItemForSale, function(index, cellText) {
+		$("#itemCandyButton" + index).on('click', function() {
+      var temp=cellItemForSale[index];
+      var textSplit=temp.split('<')
+			$("#itemSelected").val(textSplit[0]);
+		});
+	})   
+}
+
+
+
   function loadCandySuccess(candyItemArray) {
     $.each(candyItemArray, function (index, candyItem) {
       //retrieve and store the values
@@ -99,23 +121,24 @@ function clearTableCells() {
     }
         // build a table using the retrieved values
         var row = "<tr id=\'abc1\'>";
-         row += "<td>" + cellItemForSale[0] + "</td>";
-        row += "<td>" + cellItemForSale[1] + "</td>";
-        row +="<td>" + cellItemForSale[2] + "</td>";
+        row += makeButton(0) ;
+        row += makeButton(1) ;
+        row += makeButton(2) ;
         row += "</tr>";
         contentRows.append(row);
          row = "<tr id=\'abc2\'>";
-         row += "<td>" + cellItemForSale[3] + "</td>";
-        row += "<td>" + cellItemForSale[4] + "</td>";
-        row +="<td>" + cellItemForSale[5] + "</td>";
+         row += makeButton(3) ;
+         row += makeButton(4) ;
+         row += makeButton(5) ;
         row += "</tr>";
         contentRows.append(row);
          row = "<tr id=\'abc3\'>";
-        row += "<td>" + cellItemForSale[6] + "</td>";
-       row += "<td>" + cellItemForSale[7] + "</td>";
-       row +="<td>" + cellItemForSale[8] + "</td>";
+         row += makeButton(6) ;
+         row += makeButton(7) ;
+         row += makeButton(8) ;
        row += "</tr>";
        contentRows.append(row);
+       makeButtonCallbacks();
   }
   function loadCandyError() {
     updateMessage("Error retrieving Items");
