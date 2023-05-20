@@ -22,6 +22,7 @@ CREATE TABLE `organization` (
   `OrganizationId` int NOT NULL AUTO_INCREMENT,
   `Name` varchar(45) NOT NULL,
   `Address` varchar(200) DEFAULT NULL,
+  `City` varchar(45) DEFAULT NULL,
   `State` varchar(2) DEFAULT NULL,
   `Zip` varchar(45) DEFAULT NULL,
   `Description` varchar(200) DEFAULT NULL,
