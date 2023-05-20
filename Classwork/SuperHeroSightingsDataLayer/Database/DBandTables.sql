@@ -71,10 +71,10 @@ DROP TABLE IF EXISTS `org_to_superhero`;
 CREATE TABLE `org_to_superhero` (
   `orgToShID` int NOT NULL AUTO_INCREMENT,
   `SuperHeroId` int DEFAULT NULL,
-  `OrganiationId` int DEFAULT NULL,
+  `OrganizationId` int DEFAULT NULL,
   PRIMARY KEY (`orgToShID`),
-  KEY `OrgExists_idx` (`OrganiationId`),
+  KEY `OrgExists_idx` (`OrganizationId`),
   KEY `SHExists_idx` (`SuperHeroId`),
-  CONSTRAINT `OrgExists` FOREIGN KEY (`OrganiationId`) REFERENCES `organization` (`OrganizationId`),
+  CONSTRAINT `OrgExists` FOREIGN KEY (`OrganizationId`) REFERENCES `organization` (`OrganizationId`),
   CONSTRAINT `SHExists` FOREIGN KEY (`SuperHeroId`) REFERENCES `superhero` (`SuperHeroId`)
 )  COMMENT='Requirements:\nThe system must be able to report all of the members of a particular organization.\nThe system must be able to report all of the organizations a particular superhero/villain belongs to.\nHeroes are affiliated with one or more superhero/supervillain organizations.';
