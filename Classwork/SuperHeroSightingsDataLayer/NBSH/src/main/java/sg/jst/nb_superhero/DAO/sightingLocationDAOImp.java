@@ -95,6 +95,8 @@ public class sightingLocationDAOImp implements sightingLocationDAO {
     @Transactional
     public boolean DeletesightingLocation(sightingLocationDTO dto) {
         int id=dto.getSL_ID();
+        final String DELETE_SE = "DELETE FROM sightingevent WHERE SL_ID = ?";
+        jdbc.update(DELETE_SE, id);        
         final String DELETE_ORG_TO = "DELETE FROM sightinglocation WHERE SL_ID = ?";
         jdbc.update(DELETE_ORG_TO, id);
         return true;
