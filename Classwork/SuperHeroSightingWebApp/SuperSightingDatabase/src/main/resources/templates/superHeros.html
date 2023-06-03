@@ -50,11 +50,14 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="superPower" class="col-3 col-form-label">
+                    <label for="superPowerId" class="col-3 col-form-label">
                         Super Power</label>
                     <div class="col-9">
-                        <input type="text" name="superPower"
-                               id="superPower" class="form-control"/>
+                    <select id="superPowerId" name="superPowerId" class="form-control" >
+                        <option th:each="supPower : ${superPowerId}"
+                                th:value="${supPower.superPowerId}"th:text="${supPower.superPowerName}">
+                            NoNameSteaks</option>
+                    </select>
                     </div>
                 </div>
                 <div class="form-group row">
