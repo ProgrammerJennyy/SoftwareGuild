@@ -63,9 +63,9 @@ public class SuperPowerDAOImp implements SuperPowerDAO {
     @Transactional
     public void DeleteSuperPower(superPowerDTO dto) {
         int id=dto.getSuperPowerId();
-        final String DELETE_ORG_TO = "UPDATE superpower set SuperPowerId = 1 WHERE SuperPowerId = ?";
+        final String DELETE_ORG_TO = "UPDATE superhero set SuperPowerId = 1 WHERE SuperPowerId = ?";
         jdbc.update(DELETE_ORG_TO, id);
-        final String DELETE_SUPERHERO = "DELETE FROM superPower WHERE SuperPowerId = ?";
+        final String DELETE_SUPERHERO = "DELETE FROM superpower WHERE SuperPowerId = ?";
         jdbc.update(DELETE_SUPERHERO, id);
     }
 
