@@ -4,17 +4,26 @@ CREATE DATABASE superherosightings;
 
 USE superherosightings;
 
+DROP TABLE IF EXISTS `superpower`;
+CREATE TABLE `superpower` (
+  `SuperPowerId` int NOT NULL AUTO_INCREMENT,
+  `SuperPowerName` varchar(45) NOT NULL,
+  PRIMARY KEY (`SuperPowerId`)
+) ;
+
 
 
 DROP TABLE IF EXISTS `superhero`;
+
 CREATE TABLE `superhero` (
   `SuperHeroId` int NOT NULL AUTO_INCREMENT,
   `Name` varchar(45) NOT NULL,
-  `SuperPower` varchar(200) NOT NULL,
+  `SuperPowerId` int NOT NULL DEFAULT '1',
   `Description` varchar(200) DEFAULT NULL,
-  PRIMARY KEY (`SuperHeroId`)
-)  COMMENT='Requirement: Heroes have names, descriptions, and a superpower.';
-
+  PRIMARY KEY (`SuperHeroId`),
+  KEY `sp_id_idx` (`SuperPowerId`),
+  CONSTRAINT `sp_id` FOREIGN KEY (`SuperPowerId`) REFERENCES `superpower` (`SuperPowerId`)
+) COMMENT='Requirement: Heroes have names, descriptions, and a superpower.';
 
 
 DROP TABLE IF EXISTS `organization`;
@@ -56,7 +65,7 @@ CREATE TABLE `sightingevent` (
   `SightingEventId` int NOT NULL AUTO_INCREMENT,
   `SuperHeroId` int DEFAULT NULL,
   `SL_ID` int DEFAULT NULL,
-  `EventDate` date NOT NULL,
+  `EventDate` datetime NOT NULL,
   PRIMARY KEY (`SightingEventId`),
   KEY `SHID_idx` (`SuperHeroId`),
   KEY `LOCID_idx` (`SL_ID`),

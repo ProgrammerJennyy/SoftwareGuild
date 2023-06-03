@@ -13,7 +13,7 @@ class superPowerDTOTest {
     @BeforeEach
     void setUp() {
         spDTO = new superPowerDTO();
-        spDTO.setSuperPower("Losing Packages");
+        spDTO.setSuperPowerName("Losing Packages");
         spDTO.setSuperPowerId(33);
     }
 
@@ -23,13 +23,13 @@ class superPowerDTOTest {
 
     @Test
     void getSuperPower() {
-        assertEquals("Losing Packages", spDTO.getSuperPower());
+        assertEquals("Losing Packages", spDTO.getSuperPowerName());
     }
 
     @Test
     void setSuperPower() {
-        spDTO.setSuperPower("Delivery");
-        assertEquals("Delivery", spDTO.getSuperPower());
+        spDTO.setSuperPowerName("Delivery");
+        assertEquals("Delivery", spDTO.getSuperPowerName());
 
     }
 

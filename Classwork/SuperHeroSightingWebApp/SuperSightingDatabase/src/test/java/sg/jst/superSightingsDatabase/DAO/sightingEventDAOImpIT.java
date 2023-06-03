@@ -56,7 +56,7 @@ public class sightingEventDAOImpIT {
 
         m_shdto = new SuperHeroDTO();
         m_shdto.setName("SuperMan");
-        m_shdto.setSuperPower("flying");
+        m_shdto.setSuperPowerId(1);
         m_shdto.setDescription("flys and strong");
         m_shdto = shinstance.CreateSuperHero(m_shdto);
 
@@ -133,12 +133,12 @@ public class sightingEventDAOImpIT {
         if (m_dto.getSightingEventId() == 0) {
             testCreatesightingEvent();
         }
-        m_dto.setEventDate("2024-1-1");
+        m_dto.setEventDate("2024-01-01 02:42:03");
         instance.UpdatesightingEvent(m_dto);
         m_dto = instance.GetsightingEventById(m_dto.getSightingEventId());
         int pass = 0;
         String test=m_dto.getEventDate();
-        if (test.equals("2024-01-01")) {
+        if (test.equals("2024-01-01 02:42:03")) {
             pass = 1;
         }
         assertEquals(1, pass);

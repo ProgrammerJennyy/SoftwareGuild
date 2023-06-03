@@ -14,9 +14,26 @@ INSERT INTO `sightinglocation` VALUES (1,'Xcel Center','Xcel Center - Event Cent
 UNLOCK TABLES;
 
 
+LOCK TABLES `superpower` WRITE;
+/*!40000 ALTER TABLE `superpower` DISABLE KEYS */;
+INSERT INTO `superpower` VALUES 
+(1,'None'),
+(2,'Fire'),
+(3,'Strength'),
+(4,'Shape Shifter'),
+(5,'Fighting');
+/*!40000 ALTER TABLE `superpower` ENABLE KEYS */;
+UNLOCK TABLES;
+
+
 LOCK TABLES `superhero` WRITE;
 /*!40000 ALTER TABLE `superhero` DISABLE KEYS */;
-INSERT INTO `superhero` VALUES (1,'Johnny Storm','Fire','The Human Torch'),(2,'Ben Grimm','Strength','The Thing'),(3,'Lyja Storm','ShapeShift','Ms. Fantastic '),(4,'Joker','None','Chemical Engineering to make lethal poisions.'),(5,'Harley Quinn','Strength','Combat Expert');
+INSERT INTO `superhero` VALUES 
+(1,'Johnny Storm',2,'The Human Torch'),
+(2,'Ben Grimm',3,'The Thing'),
+(3,'Lyja Storm',4,'Ms. Fantastic '),
+(4,'Joker',1,'Chemical Engineering to make lethal poisions.'),
+(5,'Harley Quinn',5,'Combat Expert');
 /*!40000 ALTER TABLE `superhero` ENABLE KEYS */;
 UNLOCK TABLES;
 

@@ -3,15 +3,15 @@ package sg.jst.superSightingsDatabase.DTO;
 public class superPowerDTO {
     private int superPowerId;
 
-    public String getSuperPower() {
-        return superPower;
+    public String getSuperPowerName() {
+        return superPowerName;
     }
 
-    public void setSuperPower(String superPower) {
-        this.superPower = superPower;
+    public void setSuperPowerName(String superPowerName) {
+        this.superPowerName = superPowerName;
     }
 
-    private String superPower;
+    private String superPowerName;
 
     public int getSuperPowerId() {
         return superPowerId;

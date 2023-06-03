@@ -41,7 +41,7 @@ public class org_to_superheroDAOImpIT {
        SuperHeroDTO sTest= new SuperHeroDTO();
        sTest.setName("Jenny");
        sTest.setDescription("developer");
-       sTest.setSuperPower("Coffee");
+       sTest.setSuperPowerId(1);
        sTest=superinstance.CreateSuperHero(sTest);
        shId=sTest.getSuperHeroId();
 
