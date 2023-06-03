@@ -26,11 +26,11 @@ public class SuperHeroDAOImp implements SuperHeroDAO {
     @Override
     @Transactional
     public SuperHeroDTO CreateSuperHero(SuperHeroDTO dto) {
-        final String INSERT_SH = "INSERT INTO superhero(Name, SuperPower, Description) "
+        final String INSERT_SH = "INSERT INTO superhero(Name, SuperPowerId, Description) "
                 + "VALUES(?,?,?)";
         jdbc.update(INSERT_SH,
                 dto.getName(),
-                dto.getSuperPower(),
+                dto.getSuperPowerId(),
                 dto.getDescription());
         int newId = jdbc.queryForObject("SELECT LAST_INSERT_ID()", Integer.class);
         dto.setSuperHeroId(newId);
@@ -39,17 +39,17 @@ public class SuperHeroDAOImp implements SuperHeroDAO {
     @Override
     public List<SuperHeroDTO> ReadAll()
     {
-        final String sql = "SELECT SuperHeroId,Name,SuperPower,Description FROM superhero;";
+        final String sql = "SELECT SuperHeroId,Name,SuperPowerId,Description FROM superhero;";
         return jdbc.query(sql, new ToDoMapper());
     }
     @Override
     public boolean UpdateSuperHero(SuperHeroDTO dto)
     {
-        final String UPDATE_SH = "UPDATE superhero SET Name = ?, SuperPower = ?, "
+        final String UPDATE_SH = "UPDATE superhero SET Name = ?, SuperPowerId = ?, "
                 + "Description = ? WHERE SuperHeroId = ?";
         jdbc.update(UPDATE_SH,
                 dto.getName(),
-                dto.getSuperPower(),
+                dto.getSuperPowerId(),
                 dto.getDescription(),
                 dto.getSuperHeroId());        
         return true;
@@ -84,7 +84,7 @@ private static final class ToDoMapper implements RowMapper<SuperHeroDTO> {
         SuperHeroDTO sh = new SuperHeroDTO();
         sh.setSuperHeroId(rs.getInt("SuperHeroId"));
         sh.setName(rs.getString("Name"));
-        sh.setSuperPower(rs.getString("SuperPower"));
+        sh.setSuperPowerId(rs.getInt("SuperPowerId"));
         sh.setDescription(rs.getString("Description"));
         return sh;
     }

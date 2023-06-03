@@ -50,7 +50,7 @@ public class SuperHeroDAOImpIT {
         SuperHeroDTO test= new SuperHeroDTO();
         test.setName("AmazonMan");
         test.setDescription("Drives Truck");
-        test.setSuperPower("Losing Packages");
+        test.setSuperPowerId(1);
         superHeroDAOImp.CreateSuperHero(test);
         List<SuperHeroDTO> dtos = superHeroDAOImp.ReadAll();
         for (SuperHeroDTO dto : dtos) {
@@ -111,13 +111,13 @@ public class SuperHeroDAOImpIT {
             if(dto.getName().equals("AmazonMan")){
                 System.out.println(dto.getName());
                 id=dto.getSuperHeroId();
-                dto.setSuperPower("Delivery");
+                dto.setSuperPowerId(2);
                 superHeroDAOImp.UpdateSuperHero(dto);
                 break;
             }
         }
          test = superHeroDAOImp.GetSuperHeroById(id);
-        assertEquals("Delivery",test.getSuperPower()); 
+        assertEquals(2,test.getSuperPowerId());
     }
     
     @org.junit.jupiter.api.Test
