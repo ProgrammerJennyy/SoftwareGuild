@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import sg.jst.superSightingsDatabase.DAO.SuperHeroDAO;
 import sg.jst.superSightingsDatabase.DAO.SuperHeroDAOImp;
 import sg.jst.superSightingsDatabase.DAO.SuperPowerDAOImp;
 import sg.jst.superSightingsDatabase.DTO.SuperHeroDTO;
@@ -46,13 +47,32 @@ public class superHeros {
         newSuper.setSuperPowerId(Integer.parseInt(superPowerId));
         newSuper.setDescription(description);
         superHeroDAOImp.CreateSuperHero(newSuper);
-        return "redirect:superHeros";
+        return "redirect:/superHeros";
     }
+
     @GetMapping("deleteSuper")
     public String deleteTeacher(HttpServletRequest request) {
         int id = Integer.parseInt(request.getParameter("SuperHeroId"));
         SuperHeroDTO newSuper = superHeroDAOImp.GetSuperHeroById(id);
                 superHeroDAOImp.DeleteSuperHero(newSuper);
         return "redirect:/superHeros";
+    }
+//    @GetMapping("editSHs")
+//    public String editSuperHeros(Integer id, Model model) {
+//        SuperHeroDTO dto = superHeroDAOImp.GetSuperHeroById(4);
+//        model.addAttribute("superName", dto.getName());
+//        model.addAttribute("description",dto.getDescription());
+//        model.addAttribute("superPowerId",dto.getSuperHeroId());
+//        return "editSuperHeros";
+//    }
+    @GetMapping("editSHs")
+    public String editSHs(HttpServletRequest request, Model model) {
+        int id = Integer.parseInt(request.getParameter("SuperHeroId"));
+        SuperHeroDTO dto = superHeroDAOImp.GetSuperHeroById(id);
+        model.addAttribute("superName", dto.getName());
+        model.addAttribute("description",dto.getDescription());
+        List<superPowerDTO> spDtos = superPowerDAOImp.ReadAll();
+        model.addAttribute("superPowerId",spDtos);
+        return "editSuperHeros";
     }
 }

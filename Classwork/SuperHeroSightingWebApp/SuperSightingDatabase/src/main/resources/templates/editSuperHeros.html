@@ -37,10 +37,10 @@
     </div>
     <div class="row m-4 border border-dark">
         <div class="col-3 text-center m-3">
-            <span class="h3">Add Super</span>
+            <span class="h3">Edit Super</span>
         </div>
         <div class="col-7 text-center m-3">
-            <form action="addSuper" method="POST">
+            <form action="EditSuper" method="POST">
                 <div class="form-group row">
                     <label for="superName" class="col-3 col-form-label">
                         Super Name</label>
@@ -67,37 +67,11 @@
                         <input type="text" name="description"
                                id="description" class="form-control"/>
                     </div></div>
-                <button type="submit" class="btn btn-primary">Add Super</button>
+                <button type="submit" class="btn btn-primary">Edit Super</button>
             </form>
         </div>
     </div>
 
-    <div class="row m-4 border border-dark">
-        <div class="col text-center m-3">
-            <table class="table table-striped">
-                <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Super Power</th>
-                    <th>Description</th>
-                    <th>Edit</th>
-                    <th>Delete</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:each="superHero : ${superHeros}">
-                    <td th:text="${superHero.SuperHeroId}">ID</td>
-                    <td th:text="${superHero.Name}">Name</td>
-                    <td th:text="${superHero.SuperPower}">SuperPower</td>
-                    <td th:text="${superHero.Description}">Description</td>
-                    <td><a href="#" th:href="@{/editSHs(SuperHeroId=${superHero.SuperHeroId})}">Edit</a></td>
-                    <td><a href="#" th:href="@{/deleteSuper(SuperHeroId=${superHero.SuperHeroId})}">Delete</a></td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
 </div>
 
 
