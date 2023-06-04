@@ -42,6 +42,106 @@
       <a href="sightings" class="btn btn-outline-primary btn-lg">Sightings</a>
     </div>
   </div>
+  <div class="row m-4 border border-dark">
+    <div class="col-3 text-center m-3">
+      <span class="h3">Add Organization</span>
+    </div>
+    <div class="col-7 text-center m-3">
+      <form action="addOrganization" method="POST">
+        <div class="form-group row">
+          <label for="Name" class="col-3 col-form-label">
+            Name</label>
+          <div class="col-9">
+            <input type="text" name="Name"
+                   id="Name" class="form-control"/>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="Description" class="col-3 col-form-label">
+            Description</label>
+          <div class="col-9">
+            <input type="text" name="Description"
+                   id="Description" class="form-control"/>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="Address" class="col-3 col-form-label">
+            Address</label>
+          <div class="col-9">
+            <input type="text" name="Address"
+                   id="Address" class="form-control"/>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="City" class="col-3 col-form-label">
+            City</label>
+          <div class="col-9">
+            <input type="text" name="City"
+                   id="City" class="form-control"/>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="State" class="col-3 col-form-label">
+            State</label>
+          <div class="col-9">
+            <input type="text" name="State"
+                   id="State" class="form-control"/>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="Zip" class="col-3 col-form-label">
+            Zip</label>
+          <div class="col-9">
+            <input type="text" name="Zip"
+                   id="Zip" class="form-control"/>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="Phone" class="col-3 col-form-label">
+            Phone</label>
+          <div class="col-9">
+            <input type="text" name="Phone"
+                   id="Phone" class="form-control"/>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Add Organization</button>
+      </form>
+    </div>
+  </div>
+  <div class="row m-4 border border-dark">
+    <div class="col text-center m-3">
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Description</th>
+          <th>Address</th>
+          <th>City</th>
+          <th>State</th>
+          <th>Zip</th>
+          <th>Phone</th>
+          <th>Edit</th>
+          <th>Delete</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="sOrganization : ${sOrganizations}">
+          <td th:text="${sOrganization.OrganizationId}">ID</td>
+          <td th:text="${sOrganization.Name}">Name</td>
+          <td th:text="${sOrganization.Description}">Description</td>
+          <td th:text="${sOrganization.Address}">Address</td>
+          <td th:text="${sOrganization.City}">City</td>
+          <td th:text="${sOrganization.State}">State</td>
+          <td th:text="${sOrganization.Zip}">Zip</td>
+          <td th:text="${sOrganization.Phone}">Phone</td>
+          <td><a href="#" th:href="@{/editOrg(SL_ID=${sOrganization.OrganizationId})}">Edit</a></td>
+          <td><a href="#" th:href="@{/deleteOrganization(OrganizationId=${sOrganization.OrganizationId})}">Delete</a></td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </div>
 
 
