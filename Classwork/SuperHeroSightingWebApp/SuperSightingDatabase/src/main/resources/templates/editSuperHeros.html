@@ -46,7 +46,7 @@
                         Super Name</label>
                     <div class="col-9">
                         <input type="text" name="superName"
-                               id="superName" class="form-control"/>
+                               id="superName" class="form-control"  th:value="${superName}"/>
                     </div>
                 </div>
                 <div class="form-group row">
@@ -65,8 +65,9 @@
                         Description</label>
                     <div class="col-9">
                         <input type="text" name="description"
-                               id="description" class="form-control"/>
+                               id="description" class="form-control" th:value="${description}"/>
                     </div></div>
+                <input type="hidden" name="SuperHeroId" th:value="${SuperHeroId}" />
                 <button type="submit" class="btn btn-primary">Edit Super</button>
             </form>
         </div>

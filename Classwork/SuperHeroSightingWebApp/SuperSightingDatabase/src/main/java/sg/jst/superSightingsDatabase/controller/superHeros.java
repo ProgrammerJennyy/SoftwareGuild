@@ -57,14 +57,20 @@ public class superHeros {
                 superHeroDAOImp.DeleteSuperHero(newSuper);
         return "redirect:/superHeros";
     }
-//    @GetMapping("editSHs")
-//    public String editSuperHeros(Integer id, Model model) {
-//        SuperHeroDTO dto = superHeroDAOImp.GetSuperHeroById(4);
-//        model.addAttribute("superName", dto.getName());
-//        model.addAttribute("description",dto.getDescription());
-//        model.addAttribute("superPowerId",dto.getSuperHeroId());
-//        return "editSuperHeros";
-//    }
+    @PostMapping("EditSuper")
+    public String editSuper(HttpServletRequest request) {
+        String superName = request.getParameter("superName");
+        String superPowerId = request.getParameter("superPowerId");
+        String description = request.getParameter("description");
+        int id = Integer.parseInt(request.getParameter("SuperHeroId"));
+        SuperHeroDTO dto = superHeroDAOImp.GetSuperHeroById(id);
+        dto.setName(superName);
+        dto.setSuperPowerId(Integer.parseInt(superPowerId));
+        dto.setDescription(description);
+        superHeroDAOImp.UpdateSuperHero(dto);
+        return "redirect:/superHeros";
+    }
+
     @GetMapping("editSHs")
     public String editSHs(HttpServletRequest request, Model model) {
         int id = Integer.parseInt(request.getParameter("SuperHeroId"));
@@ -73,6 +79,7 @@ public class superHeros {
         model.addAttribute("description",dto.getDescription());
         List<superPowerDTO> spDtos = superPowerDAOImp.ReadAll();
         model.addAttribute("superPowerId",spDtos);
+        model.addAttribute("SuperHeroId",id);
         return "editSuperHeros";
     }
 }
