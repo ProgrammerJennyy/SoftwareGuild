@@ -5,6 +5,8 @@
 package sg.jst.superSightingsDatabase.DAO;
 
 import java.util.List;
+
+import org.springframework.stereotype.Repository;
 import sg.jst.superSightingsDatabase.DTO.sightingLocationDTO;
 
 import java.sql.ResultSet;
@@ -20,6 +22,7 @@ import org.springframework.transaction.annotation.Transactional;
  *
  * @author Jenny
  */
+@Repository
 public class sightingLocationDAOImp implements sightingLocationDAO {
 
     private final JdbcTemplate jdbc;

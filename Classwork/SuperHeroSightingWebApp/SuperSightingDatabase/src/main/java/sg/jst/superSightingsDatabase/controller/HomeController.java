@@ -14,11 +14,7 @@ public class HomeController {
         return "index";
     }
 
-    // Move these to other controllers later
-    @GetMapping("locations")
-    public String locations() {
-        return "locations";
-    }
+
 
     @GetMapping("organizations")
     public String organizations() {

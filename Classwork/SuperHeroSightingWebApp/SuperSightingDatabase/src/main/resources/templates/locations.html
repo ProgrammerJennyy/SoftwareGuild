@@ -42,6 +42,116 @@
             <a href="sightings" class="btn btn-outline-primary btn-lg">Sightings</a>
         </div>
     </div>
+    <div class="row m-4 border border-dark">
+        <div class="col-3 text-center m-3">
+            <span class="h3">Add Location</span>
+        </div>
+        <div class="col-7 text-center m-3">
+            <form action="addLocation" method="POST">
+                <div class="form-group row">
+                    <label for="Name" class="col-3 col-form-label">
+                        Name</label>
+                    <div class="col-9">
+                        <input type="text" name="Name"
+                               id="Name" class="form-control"/>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="Description" class="col-3 col-form-label">
+                        Description</label>
+                    <div class="col-9">
+                        <input type="text" name="Description"
+                               id="Description" class="form-control"/>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="Address" class="col-3 col-form-label">
+                        Address</label>
+                    <div class="col-9">
+                        <input type="text" name="Address"
+                               id="Address" class="form-control"/>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="City" class="col-3 col-form-label">
+                        City</label>
+                    <div class="col-9">
+                        <input type="text" name="City"
+                               id="City" class="form-control"/>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="State" class="col-3 col-form-label">
+                        State</label>
+                    <div class="col-9">
+                        <input type="text" name="State"
+                               id="State" class="form-control"/>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="Zip" class="col-3 col-form-label">
+                        Zip</label>
+                    <div class="col-9">
+                        <input type="text" name="Zip"
+                               id="Zip" class="form-control"/>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="Latitude" class="col-3 col-form-label">
+                        Latitude</label>
+                    <div class="col-9">
+                        <input type="text" name="Latitude"
+                               id="Latitude" class="form-control"/>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="Longitude" class="col-3 col-form-label">
+                        Longitude</label>
+                    <div class="col-9">
+                        <input type="text" name="Longitude"
+                               id="Longitude" class="form-control"/>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Add Location</button>
+            </form>
+        </div>
+    </div>
+    <div class="row m-4 border border-dark">
+        <div class="col text-center m-3">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Address</th>
+                    <th>City</th>
+                    <th>State</th>
+                    <th>Zip</th>
+                    <th>Latitude</th>
+                    <th>Longitude</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="sLocation : ${sLocations}">
+                    <td th:text="${sLocation.SL_ID}">ID</td>
+                    <td th:text="${sLocation.Name}">Name</td>
+                    <td th:text="${sLocation.Description}">Description</td>
+                    <td th:text="${sLocation.Address}">Address</td>
+                    <td th:text="${sLocation.City}">City</td>
+                    <td th:text="${sLocation.State}">State</td>
+                    <td th:text="${sLocation.Zip}">Zip</td>
+                    <td th:text="${sLocation.Latitude}">Latitude</td>
+                    <td th:text="${sLocation.Longitude}">Longitude</td>
+                    <td><a href="#" th:href="@{/editSL(SL_ID=${sLocation.SL_ID})}">Edit</a></td>
+                    <td><a href="#" th:href="@{/deleteLocation(SL_ID=${sLocation.SL_ID})}">Delete</a></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>
 
 
