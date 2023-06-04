@@ -9,8 +9,32 @@ public class HomeController {
      *
      * @return
      */
-    @GetMapping("/")
+    @GetMapping(value={"","/","index"})
     public String index() {
         return "index";
     }
+
+    // Move these to other controllers later
+    @GetMapping("locations")
+    public String locations() {
+        return "locations";
+    }
+
+    @GetMapping("organizations")
+    public String organizations() {
+        return "organizations";
+    }
+
+    @GetMapping("sightings")
+    public String sightings() {
+        return "sightings";
+    }
+
+    @GetMapping("orgToSuperHero")
+    public String orgToSuperHero() {
+        return "orgToSuperHero";
+    }
+
+
+
 }
