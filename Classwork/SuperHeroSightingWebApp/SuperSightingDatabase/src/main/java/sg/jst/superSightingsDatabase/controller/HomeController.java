@@ -21,10 +21,6 @@ public class HomeController {
         return "sightings";
     }
 
-    @GetMapping("orgToSuperHero")
-    public String orgToSuperHero() {
-        return "orgToSuperHero";
-    }
 
 
 
