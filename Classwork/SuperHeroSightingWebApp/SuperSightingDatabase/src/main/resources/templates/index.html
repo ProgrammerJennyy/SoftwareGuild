@@ -42,6 +42,27 @@
             <a href="sightings" class="btn btn-outline-primary btn-lg">Sightings</a>
         </div>
     </div>
+    <div class="row m-4 border border-dark">
+        <div class="col text-center m-3">
+            <table class="table table-striped">
+                <thead>
+                <tr><b>News Feed</b></tr>
+                <tr>
+                    <th>Super Name</th>
+                    <th>Location Name</th>
+                    <th>Sighting Time</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="sSightingEvent : ${sSightingEvents}">
+                    <td th:text="${sSightingEvent.SuperHeroName}">Super Name</td>
+                    <td th:text="${sSightingEvent.LocationName}">Location Name</td>
+                    <td th:text="${sSightingEvent.EventDate}">Event Date</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>
 
 

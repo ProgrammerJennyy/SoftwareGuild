@@ -53,6 +53,12 @@ public class sightingEventDAOImp implements sightingEventDAO {
     }
 
     @Override
+    public List<sightingEventDTO> ReadNews() {
+        final String sql = "SELECT * FROM sightingevent ORDER BY EventDate Desc LIMIT 10;";
+        return jdbc.query(sql, new ToDoMapper());
+    }
+
+    @Override
     public sightingEventDTO GetsightingEventById(int id) {
         try {
             final String GET_SH_BY_ID = "SELECT * FROM sightingevent WHERE SightingEventId = ?";

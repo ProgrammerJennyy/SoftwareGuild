@@ -14,6 +14,7 @@ import sg.jst.superSightingsDatabase.DTO.sightingEventDTO;
 public interface sightingEventDAO {
     public sightingEventDTO CreatesightingEvent(sightingEventDTO dto);
     public List<sightingEventDTO> ReadAll();
+    public List<sightingEventDTO> ReadNews();
     public sightingEventDTO GetsightingEventById(int id);
     public boolean UpdatesightingEvent(sightingEventDTO dto);
     public boolean DeletesightingEvent(sightingEventDTO dto);     
