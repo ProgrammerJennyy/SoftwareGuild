@@ -92,7 +92,7 @@ public class locations {
         dto.setZip(Zip);
         dto.setLatitude(Double.parseDouble(Latitude));
         dto.setLongitude(Double.parseDouble(Longitude));
-        SightingLocationDAOImp.CreatesightingLocation(dto);
+        SightingLocationDAOImp.UpdatesightingLocation(dto);
         return "redirect:/locations";
     }
 
