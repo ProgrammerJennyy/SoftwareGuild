@@ -42,14 +42,24 @@ public class superPowers {
         return "redirect:/superPowers";
     }
 
-    @GetMapping("editSPs")
+    @GetMapping("editSP")
     public String editSHs(HttpServletRequest request, Model model) {
-        return "";
+        int id = Integer.parseInt(request.getParameter("SuperPowerId"));
+        superPowerDTO dto = superPowerDAOImp.GetSuperPowerById(id);
+        model.addAttribute("SuperPowerName", dto.getSuperPowerName());
+        model.addAttribute("SuperPowerId", dto.getSuperPowerId());
+        return "editSuperPowers";
     }
 
     @PostMapping("EditPower")
     public String editPower(HttpServletRequest request) {
-        return "";
+        String superPowerName = request.getParameter("SuperPowerName");
+        String superPowerId = request.getParameter("SuperPowerId");
+        int id = Integer.parseInt(request.getParameter("SuperPowerId"));
+        superPowerDTO dto = superPowerDAOImp.GetSuperPowerById(id);
+        dto.setSuperPowerName(superPowerName);
+        superPowerDAOImp.UpdateSuperPower(dto);
+        return "redirect:/superPowers";
     }
 
 }
