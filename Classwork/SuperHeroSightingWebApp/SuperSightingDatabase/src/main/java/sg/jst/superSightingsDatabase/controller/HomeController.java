@@ -16,11 +16,6 @@ public class HomeController {
 
 
 
-    @GetMapping("sightings")
-    public String sightings() {
-        return "sightings";
-    }
-
 
 
 

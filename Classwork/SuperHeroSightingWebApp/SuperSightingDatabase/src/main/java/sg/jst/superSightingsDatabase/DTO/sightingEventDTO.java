@@ -5,6 +5,24 @@ public class sightingEventDTO{
     private int SuperHeroId;
     private int SL_ID;
     private String EventDate;
+    private String SuperHeroName;
+    private String LocationName;
+
+    public String getSuperHeroName() {
+        return SuperHeroName;
+    }
+
+    public void setSuperHeroName(String superHeroName) {
+        SuperHeroName = superHeroName;
+    }
+
+    public String getLocationName() {
+        return LocationName;
+    }
+
+    public void setLocationName(String locationName) {
+        LocationName = locationName;
+    }
 
     public int getSightingEventId() {
         return SightingEventId;
