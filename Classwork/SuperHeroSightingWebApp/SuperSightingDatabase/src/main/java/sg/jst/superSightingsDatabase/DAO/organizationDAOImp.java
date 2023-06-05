@@ -88,8 +88,10 @@ public class organizationDAOImp implements organizationDAO {
     @Transactional
     public boolean Deleteorganization(organizationDTO dto) {
         int id=dto.getOrganizationId();
-        final String DELETE_ORG_TO = "DELETE FROM organization WHERE OrganizationId = ?";
+        final String DELETE_ORG_TO = "DELETE FROM org_to_superhero WHERE OrganizationId = ?";
         jdbc.update(DELETE_ORG_TO, id);
+        final String DELETE_ORG = "DELETE FROM organization WHERE OrganizationId = ?";
+        jdbc.update(DELETE_ORG, id);
         return true;    }
 
 private static final class ToDoMapper implements RowMapper<organizationDTO> {

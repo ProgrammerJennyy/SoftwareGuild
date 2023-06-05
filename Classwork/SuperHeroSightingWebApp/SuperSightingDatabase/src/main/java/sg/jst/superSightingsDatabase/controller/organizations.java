@@ -53,5 +53,42 @@ public class organizations {
         dao.Deleteorganization(dto);
         return "redirect:/organizations";
     }
+    @GetMapping("editOrg")
+    public String editSLs(HttpServletRequest request, Model model) {
+        int id = Integer.parseInt(request.getParameter("OrganizationId"));
+        organizationDTO dto = dao.GetorganizationById(id);
+        model.addAttribute("OrganizationId", id);
+        model.addAttribute("Name", dto.getName());
+        model.addAttribute("Description", dto.getDescription());
+        model.addAttribute("Address", dto.getAddress());
+        model.addAttribute("City", dto.getCity());
+        model.addAttribute("Phone", dto.getPhone());
+        model.addAttribute("State", dto.getState());
+        model.addAttribute("Zip", dto.getZip());
+        return "editOrganizations";
+    }
+
+    @PostMapping("EditOrganization")
+    public String updateLocation(HttpServletRequest request) {
+        String Name = request.getParameter("Name");
+        String Description = request.getParameter("Description");
+        String Address = request.getParameter("Address");
+        String City = request.getParameter("City");
+        String State = request.getParameter("State");
+        String Zip = request.getParameter("Zip");
+        String Phone = request.getParameter("Phone");
+        int id = Integer.parseInt(request.getParameter("OrganizationId"));
+        organizationDTO dto = dao.GetorganizationById(id);
+        dto.setName(Name);
+        dto.setDescription(Description);
+        dto.setAddress(Address);
+        dto.setCity(City);
+        dto.setState(State);
+        dto.setZip(Zip);
+        dto.setPhone(Phone);
+        dao.Updateorganization(dto);
+        return "redirect:/organizations";
+    }
+
 
 }
