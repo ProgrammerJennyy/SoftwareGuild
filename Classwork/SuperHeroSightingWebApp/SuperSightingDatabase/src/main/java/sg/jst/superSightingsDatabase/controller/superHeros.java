@@ -80,6 +80,7 @@ public class superHeros {
         List<superPowerDTO> spDtos = superPowerDAOImp.ReadAll();
         model.addAttribute("superPowerId",spDtos);
         model.addAttribute("SuperHeroId",id);
+        model.addAttribute("SuperPowerIdSelected",dto.getSuperPowerId());
         return "editSuperHeros";
     }
 }

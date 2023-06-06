@@ -55,13 +55,17 @@
                                id="superName" class="form-control"  th:value="${superName}"/>
                     </div>
                 </div>
+
                 <div class="form-group row">
+                    <input type="hidden" name="SuperPowerIdSelected" th:value="${SuperPowerIdSelected}" />
                     <label for="superPowerId" class="col-3 col-form-label">
                         Super Power</label>
                     <div class="col-9">
                     <select id="superPowerId" name="superPowerId" class="form-control" >
                         <option th:each="supPower : ${superPowerId}"
-                                th:value="${supPower.superPowerId}"th:text="${supPower.superPowerName}">
+                                th:value="${supPower.superPowerId}"
+                                th:text="${supPower.superPowerName}"
+                                th:selected="${supPower.superPowerId == SuperPowerIdSelected}">
                             NoNameSteaks</option>
                     </select>
                     </div>
