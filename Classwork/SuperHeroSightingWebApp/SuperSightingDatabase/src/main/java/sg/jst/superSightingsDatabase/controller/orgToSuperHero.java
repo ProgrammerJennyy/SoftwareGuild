@@ -12,6 +12,7 @@ import sg.jst.superSightingsDatabase.DAO.organizationDAOImp;
 import sg.jst.superSightingsDatabase.DTO.SuperHeroDTO;
 import sg.jst.superSightingsDatabase.DTO.org_to_superheroDTO;
 import sg.jst.superSightingsDatabase.DTO.organizationDTO;
+import sg.jst.superSightingsDatabase.DTO.superPowerDTO;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -63,6 +64,32 @@ public class orgToSuperHero {
         dao.CreateOrgToSuperhero(dto);
         return "redirect:/orgToSuperHero";
     }
+    @GetMapping("editOrgToSup")
+    public String editSHs(HttpServletRequest request, Model model) {
+        int id = Integer.parseInt(request.getParameter("orgToShID"));
+        org_to_superheroDTO dto = dao.OrgToSuperheroById(id);
+        List<SuperHeroDTO> shDtos = shdao.ReadAll();
+        model.addAttribute("ASuperHeros",shDtos);
+        model.addAttribute("SuperHeroIdSelected",dto.getSuperHeroId());
+        List<organizationDTO> orgDtos = orgdao.ReadAll();
+        model.addAttribute("AOrganizations",orgDtos);
+        model.addAttribute("OrganizationIdSelected",dto.getOrganizationId());
+        model.addAttribute("orgToShID",id);
+        return "editOrgToSuperHero";
+    }
+
+    @PostMapping("EditOrgToSuper")
+    public String EditSupertoOrg(HttpServletRequest request) {
+        int id = Integer.parseInt(request.getParameter("orgToShID"));
+        String SuperHeroId = request.getParameter("SuperHeroId");
+        org_to_superheroDTO dto = dao.OrgToSuperheroById(id);
+        dto.setSuperHeroId(Integer.parseInt(SuperHeroId));
+        String OrganizationId = request.getParameter("OrganizationId");
+        dto.setOrganizationId(Integer.parseInt(OrganizationId));
+        dao.UpdateOrgToSuperhero(dto);
+        return "redirect:/orgToSuperHero";
+    }
+
 
 
 } // end of class
