@@ -59,7 +59,34 @@ public class sightings {
         return "redirect:/sightings";
     }
 
+    @GetMapping("editSightingEvent")
+    public String editSightings(HttpServletRequest request, Model model) {
+        int id = Integer.parseInt(request.getParameter("SightingEventId"));
+        sightingEventDTO dto = dao.GetsightingEventById(id);
+        List<SuperHeroDTO> shDtos = shdao.ReadAll();
+        model.addAttribute("ASuperHeros",shDtos);
+        model.addAttribute("SuperHeroIdSelected",dto.getSuperHeroId());
+        List<sightingLocationDTO> SLdtos = SLdao.ReadAll();
+        model.addAttribute("sLocations",SLdtos);
+        model.addAttribute("SL_IDSelected",dto.getSL_ID());
+        model.addAttribute("SightingEventId",id);
+        model.addAttribute("EventDate",dto.getEventDate());
+        return "editSightings";
+    }
+
+    @PostMapping("EditSightingEvents")
+    public String EditSightingEvent(HttpServletRequest request) {
+        String SuperHeroId = request.getParameter("SuperHeroId");
+        int id = Integer.parseInt(request.getParameter("SightingEventId"));
+        sightingEventDTO dto = dao.GetsightingEventById(id);
+        dto.setSuperHeroId(Integer.parseInt(SuperHeroId));
+        String SightingLocationId = request.getParameter("SL_ID");
+        dto.setSL_ID(Integer.parseInt(SightingLocationId));
+        String timeStringa = request.getParameter("EventDate");
+        dto.setEventDate(timeStringa);
+        dao.UpdatesightingEvent(dto);
+        return "redirect:/sightings";
+    }
 
 
-// /deleteSightingEvent(SightingEventId
-}
+} // end  class
