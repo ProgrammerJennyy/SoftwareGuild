@@ -1,11 +1,20 @@
 package sg.jst.superSightingsDatabase.DTO;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+
 public class SuperHeroDTO {
 
     private int SuperHeroId;
-    private String Name;
-    private String SuperPower;
+    @NotBlank(message = "Name cannot be blank.")
+    @Size(max = 45, message = "Name  must be 45 characters or less.")
+    private String Name; // Used for easier transfer between controller and html.
+
+    private String SuperPower; // Used for easier transfer between controller and html.
     private int SuperPowerId;
+
+    @NotBlank(message = "Description cannot be blank.")
+    @Size(max = 45, message = "Description  must be 45 characters or less.")
     private String Description;
 
     public int getSuperPowerId() {

@@ -18,7 +18,6 @@ public class superPowerDTO {
     }
     @NotBlank(message = "Power name cannot be blank.")
     @Size(max = 45, message = "The name of the power must be 45 characters or less.")
-    @Pattern(regexp = "^[a-zA-Z\\s]+$", message = "Powers cannot contain a number.")
     private String superPowerName;
 
     public int getSuperPowerId() {
