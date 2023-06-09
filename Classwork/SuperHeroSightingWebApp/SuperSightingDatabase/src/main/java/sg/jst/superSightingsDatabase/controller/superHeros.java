@@ -109,4 +109,22 @@ public class superHeros {
 
         return "editSuperHeros";
     }
-}
+
+    @GetMapping("deleteSHs")
+    public String deleteSHs(HttpServletRequest request, Model model) {
+        int id = Integer.parseInt(request.getParameter("SuperHeroId"));
+        SuperHeroDTO dto = superHeroDAOImp.GetSuperHeroById(id);
+        model.addAttribute("Name", dto.getName());
+        model.addAttribute("description",dto.getDescription());
+        List<superPowerDTO> spDtos = superPowerDAOImp.ReadAll();
+        model.addAttribute("superPowerId",spDtos);
+        model.addAttribute("SuperHeroId",id);
+        model.addAttribute("SuperPowerIdSelected",dto.getSuperPowerId());
+        Validator validate = Validation.buildDefaultValidatorFactory().getValidator();
+        violations = validate.validate(dto);
+        model.addAttribute("errors", violations);
+
+        return "deleteSuperHeros";
+    }
+
+} // end class

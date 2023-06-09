@@ -44,29 +44,35 @@
     </div>
     <div class="row m-4 border border-dark">
         <div class="col-3 text-center m-3">
-            <span class="h3">Add Sighting Event</span>
+            <span class="h3">Delete Sighting Event</span>
         </div>
         <div class="col-7 text-center m-3">
-            <form action="AddSightingEvent" method="POST">
+            <form action="deleteSightingEvent" method="GET">
                 <div class="form-group row">
+                    <input type="hidden" name="SuperHeroIdSelected" th:value="${SuperHeroIdSelected}" />
                     <label for="superHeroId" class="col-3 col-form-label">
                         Super Name</label>
                     <div class="col-9">
                         <select id="SuperHeroId" name="SuperHeroId" class="form-control" >
                             <option th:each="ASuperHero : ${ASuperHeros}"
-                                    th:value="${ASuperHero.SuperHeroId}"th:text="${ASuperHero.Name}">
+                                    th:value="${ASuperHero.SuperHeroId}"
+                                    th:text="${ASuperHero.Name}"
+                                    th:selected="${ASuperHero.SuperHeroId == SuperHeroIdSelected}">
                                 SuperHeroSteaks</option>
                         </select>
                     </div>
                 </div>
                 <div class="form-group row">
+                    <input type="hidden" name="SL_IDSelected" th:value="${SL_IDSelected}" />
                     <label for="SL_ID" class="col-3 col-form-label">
                         Location</label>
                     <div class="col-9">
                         <select id="SL_ID" name="SL_ID" class="form-control" >
                             <option th:each="sLocation : ${sLocations}"
-                                    th:value="${sLocation.SL_ID}"th:text="${sLocation.Name}">
-                                OrganizationSteaks</option>
+                                    th:value="${sLocation.SL_ID}"
+                                    th:text="${sLocation.Name}"
+                                    th:selected="${sLocation.SL_ID == SL_IDSelected}">
+                                LocationSteaks</option>
                         </select>
                     </div>
                 </div>
@@ -74,41 +80,17 @@
                     <label for="EventDate" class="col-3 col-form-label">
                         Date and Time</label>
                     <div class="col-9">
-                        <input type="datetime-local" id="EventDate" name="EventDate">
+                        <input type="datetime-local" id="EventDate" name="EventDate" th:value="${EventDate}">
                     </div>
                 </div>
+                <input type="hidden" name="SightingEventId" th:value="${SightingEventId}" />
+                <button type="submit" class="btn btn-primary">Delete Sighting Event</button>
+                <a href="sightings" class="btn btn-primary">Cancel</a>
 
-                <button type="submit" class="btn btn-primary">Add Sighting Event</button>
             </form>
         </div>
     </div>
 
-    <div class="row m-4 border border-dark">
-        <div class="col text-center m-3">
-            <table class="table table-striped">
-                <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Super Name</th>
-                    <th>Location Name</th>
-                    <th>Sighting Time</th>
-                    <th>Edit</th>
-                    <th>Delete</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:each="sSightingEvent : ${sSightingEvents}">
-                    <td th:text="${sSightingEvent.SightingEventId}">ID</td>
-                    <td th:text="${sSightingEvent.SuperHeroName}">Super Name</td>
-                    <td th:text="${sSightingEvent.LocationName}">Location Name</td>
-                    <td th:text="${sSightingEvent.EventDate}">Event Date</td>
-                    <td><a href="#" th:href="@{/editSightingEvent(SightingEventId=${sSightingEvent.SightingEventId})}">Edit</a></td>
-                    <td><a href="#" th:href="@{/deleteSightingEvents(SightingEventId=${sSightingEvent.SightingEventId})}">Delete</a></td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
 
 </div>
 

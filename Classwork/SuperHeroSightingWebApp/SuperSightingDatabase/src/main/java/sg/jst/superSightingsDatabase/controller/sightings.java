@@ -38,6 +38,21 @@ public class sightings {
         return "sightings";
     }
 
+    @GetMapping("deleteSightingEvents")
+    public String deleteSightings(HttpServletRequest request, Model model) {
+        int id = Integer.parseInt(request.getParameter("SightingEventId"));
+        sightingEventDTO dto = dao.GetsightingEventById(id);
+        List<SuperHeroDTO> shDtos = shdao.ReadAll();
+        model.addAttribute("ASuperHeros",shDtos);
+        model.addAttribute("SuperHeroIdSelected",dto.getSuperHeroId());
+        List<sightingLocationDTO> SLdtos = SLdao.ReadAll();
+        model.addAttribute("sLocations",SLdtos);
+        model.addAttribute("SL_IDSelected",dto.getSL_ID());
+        model.addAttribute("SightingEventId",id);
+        model.addAttribute("EventDate",dto.getEventDate());
+        return "deleteSightings";
+    }
+
     @GetMapping("/deleteSightingEvent")
     public String deleteTeacher(HttpServletRequest request) {
         int id = Integer.parseInt(request.getParameter("SightingEventId"));

@@ -6,8 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet"
-          href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
-          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
           crossorigin="anonymous">
     <title>Super Sighting Database</title>
 </head>
@@ -43,70 +42,51 @@
         </div>
     </div>
     <div class="row m-4 border border-dark">
+        <div class="col-12 m-1 text-center"
+             th:if="${!errors.isEmpty()}">
+            <p class="alert alert-danger" th:each="error : ${errors}"
+               th:text="${error.message}">Error message</p>
+        </div>
         <div class="col-3 text-center m-3">
-            <span class="h3">Add Sighting Event</span>
+            <span class="h3">Delete Super</span>
         </div>
         <div class="col-7 text-center m-3">
-            <form action="AddSightingEvent" method="POST">
+            <form action="deleteSuper" method="GET">
                 <div class="form-group row">
-                    <label for="superHeroId" class="col-3 col-form-label">
+                    <label for="superName" class="col-3 col-form-label">
                         Super Name</label>
                     <div class="col-9">
-                        <select id="SuperHeroId" name="SuperHeroId" class="form-control" >
-                            <option th:each="ASuperHero : ${ASuperHeros}"
-                                    th:value="${ASuperHero.SuperHeroId}"th:text="${ASuperHero.Name}">
-                                SuperHeroSteaks</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="SL_ID" class="col-3 col-form-label">
-                        Location</label>
-                    <div class="col-9">
-                        <select id="SL_ID" name="SL_ID" class="form-control" >
-                            <option th:each="sLocation : ${sLocations}"
-                                    th:value="${sLocation.SL_ID}"th:text="${sLocation.Name}">
-                                OrganizationSteaks</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="EventDate" class="col-3 col-form-label">
-                        Date and Time</label>
-                    <div class="col-9">
-                        <input type="datetime-local" id="EventDate" name="EventDate">
+                        <input type="text" name="Name" readonly="yes"
+                               id="Name" class="form-control"  th:value="${Name}"/>
                     </div>
                 </div>
 
-                <button type="submit" class="btn btn-primary">Add Sighting Event</button>
+                <div class="form-group row">
+                    <input type="hidden" name="SuperPowerIdSelected" th:value="${SuperPowerIdSelected}" />
+                    <label for="superPowerId" class="col-3 col-form-label">
+                        Super Power</label>
+                    <div class="col-9">
+                        <select id="superPowerId" readonly="yes" name="superPowerId" class="form-control" >
+                            <option th:each="supPower : ${superPowerId}"
+                                    th:value="${supPower.superPowerId}"
+                                    th:text="${supPower.superPowerName}"
+                                    th:selected="${supPower.superPowerId == SuperPowerIdSelected}">
+                                NoNameSteaks</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="description" class="col-3 col-form-label">
+                        Description</label>
+                    <div class="col-9">
+                        <input type="text" readonly="yes" name="description"
+                               id="description" class="form-control" th:value="${description}"/>
+                    </div></div>
+                <input type="hidden" name="SuperHeroId" th:value="${SuperHeroId}" />
+                <button type="submit" class="btn btn-primary">Delete Super</button>
+                <a href="superHeros" class="btn btn-primary">Cancel</a>
+
             </form>
-        </div>
-    </div>
-
-    <div class="row m-4 border border-dark">
-        <div class="col text-center m-3">
-            <table class="table table-striped">
-                <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Super Name</th>
-                    <th>Location Name</th>
-                    <th>Sighting Time</th>
-                    <th>Edit</th>
-                    <th>Delete</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:each="sSightingEvent : ${sSightingEvents}">
-                    <td th:text="${sSightingEvent.SightingEventId}">ID</td>
-                    <td th:text="${sSightingEvent.SuperHeroName}">Super Name</td>
-                    <td th:text="${sSightingEvent.LocationName}">Location Name</td>
-                    <td th:text="${sSightingEvent.EventDate}">Event Date</td>
-                    <td><a href="#" th:href="@{/editSightingEvent(SightingEventId=${sSightingEvent.SightingEventId})}">Edit</a></td>
-                    <td><a href="#" th:href="@{/deleteSightingEvents(SightingEventId=${sSightingEvent.SightingEventId})}">Delete</a></td>
-                </tr>
-                </tbody>
-            </table>
         </div>
     </div>
 
