@@ -54,6 +54,10 @@ public class sightings {
         String SightingLocationId = request.getParameter("SL_ID");
         dto.setSL_ID(Integer.parseInt(SightingLocationId));
         String timeStringa = request.getParameter("EventDate");
+        if(timeStringa.isEmpty()) // Add a check for no date add in now if its blank.
+        {
+            timeStringa = String.valueOf(java.time.LocalDateTime.now());
+        }
         dto.setEventDate(timeStringa);
         dao.CreatesightingEvent(dto);
         return "redirect:/sightings";
