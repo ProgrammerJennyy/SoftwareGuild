@@ -60,6 +60,25 @@ public class organizations {
         return "redirect:/organizations";
     }
 
+    @GetMapping("deleteOrg")
+    public String deleteSLs(HttpServletRequest request, Model model) {
+        int id = Integer.parseInt(request.getParameter("OrganizationId"));
+        organizationDTO dto = dao.GetorganizationById(id);
+        model.addAttribute("OrganizationId", id);
+        model.addAttribute("Name", dto.getName());
+        model.addAttribute("Description", dto.getDescription());
+        model.addAttribute("Address", dto.getAddress());
+        model.addAttribute("City", dto.getCity());
+        model.addAttribute("Phone", dto.getPhone());
+        model.addAttribute("State", dto.getState());
+        model.addAttribute("Zip", dto.getZip());
+        Validator validate = Validation.buildDefaultValidatorFactory().getValidator();
+        violations = validate.validate(dto);
+        model.addAttribute("errors", violations);
+        return "deleteOrganizations";
+    }
+
+
     @GetMapping("deleteOrganization")
     public String deleteTeacher(HttpServletRequest request) {
         int id = Integer.parseInt(request.getParameter("OrganizationId"));

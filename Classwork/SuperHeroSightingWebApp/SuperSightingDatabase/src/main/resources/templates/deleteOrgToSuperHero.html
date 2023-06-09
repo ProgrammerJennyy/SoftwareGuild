@@ -44,10 +44,10 @@
     </div>
     <div class="row m-4 border border-dark">
         <div class="col-3 text-center m-3">
-            <span class="h3">Edit Super To Org</span>
+            <span class="h3">Delete Super To Org</span>
         </div>
         <div class="col-7 text-center m-3">
-            <form action="EditOrgToSuper" method="POST">
+            <form action="deleteOrgToSuper" method="GET">
                 <div class="form-group row">
                     <input type="hidden" name="SuperHeroIdSelected" th:value="${SuperHeroIdSelected}" />
                     <label for="superHeroId" class="col-3 col-form-label">
@@ -77,7 +77,7 @@
                     </div>
                 </div>
                 <input type="hidden" name="orgToShID" th:value="${orgToShID}" />
-                <button type="submit" class="btn btn-primary">Edit Super To Org</button>
+                <button type="submit" class="btn btn-primary">Delete Super To Org</button>
                 <a href="orgToSuperHero" class="btn btn-primary">Cancel</a>
             </form>
         </div>

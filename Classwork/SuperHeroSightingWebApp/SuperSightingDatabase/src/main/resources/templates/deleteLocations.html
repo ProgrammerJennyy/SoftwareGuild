@@ -48,10 +48,10 @@
                th:text="${error.message}">Error message</p>
         </div>
         <div class="col-3 text-center m-3">
-            <span class="h3">Edit Location</span>
+            <span class="h3">Delete Location</span>
         </div>
         <div class="col-7 text-center m-3">
-            <form action="EditLocation" method="POST">
+            <form action="deleteLocation" method="GET">
                 <div class="form-group row">
                     <label for="Name" class="col-3 col-form-label">
                         Name</label>
@@ -117,7 +117,7 @@
                     </div>
                 </div>
                 <input type="hidden" name="SL_ID" th:value="${SL_ID}" />
-                <button type="submit" class="btn btn-primary">Edit Location</button>
+                <button type="submit" class="btn btn-primary">Delete Location</button>
                 <a href="locations" class="btn btn-primary">Cancel</a>
             </form>
         </div>

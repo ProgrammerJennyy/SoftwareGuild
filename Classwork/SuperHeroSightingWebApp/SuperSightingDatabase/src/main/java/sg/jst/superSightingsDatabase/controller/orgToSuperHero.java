@@ -46,7 +46,7 @@ public class orgToSuperHero {
         return "orgToSuperHero";
     }
 
-    @GetMapping("/deleteOrgToSup")
+    @GetMapping("/deleteOrgToSuper")
     public String deleteTeacher(HttpServletRequest request) {
         int id = Integer.parseInt(request.getParameter("orgToShID"));
         org_to_superheroDTO dto = dao.OrgToSuperheroById(id);
@@ -76,6 +76,20 @@ public class orgToSuperHero {
         model.addAttribute("OrganizationIdSelected",dto.getOrganizationId());
         model.addAttribute("orgToShID",id);
         return "editOrgToSuperHero";
+    }
+
+    @GetMapping("deleteOrgToSupOS")
+    public String deleteSHs(HttpServletRequest request, Model model) {
+        int id = Integer.parseInt(request.getParameter("orgToShID"));
+        org_to_superheroDTO dto = dao.OrgToSuperheroById(id);
+        List<SuperHeroDTO> shDtos = shdao.ReadAll();
+        model.addAttribute("ASuperHeros",shDtos);
+        model.addAttribute("SuperHeroIdSelected",dto.getSuperHeroId());
+        List<organizationDTO> orgDtos = orgdao.ReadAll();
+        model.addAttribute("AOrganizations",orgDtos);
+        model.addAttribute("OrganizationIdSelected",dto.getOrganizationId());
+        model.addAttribute("orgToShID",id);
+        return "deleteOrgToSuperHero";
     }
 
     @PostMapping("EditOrgToSuper")

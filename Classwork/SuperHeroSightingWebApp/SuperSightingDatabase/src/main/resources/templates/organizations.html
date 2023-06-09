@@ -141,7 +141,7 @@
           <td th:text="${sOrganization.Zip}">Zip</td>
           <td th:text="${sOrganization.Phone}">Phone</td>
           <td><a href="#" th:href="@{/editOrg(OrganizationId=${sOrganization.OrganizationId})}">Edit</a></td>
-          <td><a href="#" th:href="@{/deleteOrganization(OrganizationId=${sOrganization.OrganizationId})}">Delete</a></td>
+          <td><a href="#" th:href="@{/deleteOrg(OrganizationId=${sOrganization.OrganizationId})}">Delete</a></td>
         </tr>
         </tbody>
       </table>

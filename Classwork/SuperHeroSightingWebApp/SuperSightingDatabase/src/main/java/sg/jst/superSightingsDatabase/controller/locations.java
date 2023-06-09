@@ -77,6 +77,24 @@ public class locations {
         }
         return "redirect:/locations";
     }
+    @GetMapping("deleteSL")
+    public String deleteSLs(HttpServletRequest request, Model model) {
+        int id = Integer.parseInt(request.getParameter("SL_ID"));
+        sightingLocationDTO dto = SightingLocationDAOImp.GetsightingLocationId(id);
+        model.addAttribute("SL_ID", id);
+        model.addAttribute("Name", dto.getName());
+        model.addAttribute("Description", dto.getDescription());
+        model.addAttribute("Address", dto.getAddress());
+        model.addAttribute("City", dto.getCity());
+        model.addAttribute("Latitude", dto.getLatitude());
+        model.addAttribute("Longitude", dto.getLongitude());
+        model.addAttribute("State", dto.getState());
+        model.addAttribute("Zip", dto.getZip());
+        Validator validate = Validation.buildDefaultValidatorFactory().getValidator();
+        violations = validate.validate(dto);
+        model.addAttribute("errors", violations);
+        return "deleteLocations";
+    }
 
     @GetMapping("deleteLocation")
     public String deleteTeacher(HttpServletRequest request) {
