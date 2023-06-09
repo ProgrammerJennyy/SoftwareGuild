@@ -52,6 +52,18 @@ public class superPowers {
         return "redirect:/superPowers";
     }
 
+    @GetMapping("deleteSP")
+    public String deleteSPs(HttpServletRequest request, Model model) {
+        int id = Integer.parseInt(request.getParameter("SuperPowerId"));
+        superPowerDTO dto = superPowerDAOImp.GetSuperPowerById(id);
+        model.addAttribute("SuperPowerName", dto.getSuperPowerName());
+        model.addAttribute("SuperPowerId", dto.getSuperPowerId());
+        Validator validate = Validation.buildDefaultValidatorFactory().getValidator();
+        violations = validate.validate(dto);
+        model.addAttribute("errors", violations);
+        return "deleteSuperPowers";
+     }
+
     @GetMapping("deletePower")
     public String deleteSuper(HttpServletRequest request) {
         int id = Integer.parseInt(request.getParameter("SuperPowerId"));

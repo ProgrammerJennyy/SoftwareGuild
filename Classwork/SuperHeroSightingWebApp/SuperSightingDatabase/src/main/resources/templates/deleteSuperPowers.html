@@ -42,51 +42,32 @@
         </div>
     </div>
     <div class="row m-4 border border-dark">
+
         <div class="col-12 m-1 text-center"
              th:if="${!errors.isEmpty()}">
             <p class="alert alert-danger" th:each="error : ${errors}"
                th:text="${error.message}">Error message</p>
         </div>
         <div class="col-3 text-center m-3">
-            <span class="h3">Add Power</span>
+            <span class="h3">Super Power</span>
         </div>
-       <div class="col-7 text-center m-3">
-            <form action="addPower" method="POST">
+        <div class="col-7 text-center m-3">
+            <form action="deletePower" method="GET">
                 <div class="form-group row">
-                    <label for="superPowerName" class="col-3 col-form-label">
+                    <label for="SuperPowerName" class="col-3 col-form-label">
                         Super Power</label>
                     <div class="col-9">
-                        <input type="text" name="superPowerName"
-                               id="superPowerName" class="form-control"/>
+                        <input type="text" name="SuperPowerName" readonly="yes"
+                               id="SuperPowerName" class="form-control"  th:value="${SuperPowerName}"/>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-primary">Add Power</button>
+                <input type="hidden" name="SuperPowerId" th:value="${SuperPowerId}" />
+                <button type="submit" class="btn btn-primary">Delete Power</button>
+                <a href="superPowers" class="btn btn-primary">Cancel</a>
             </form>
         </div>
     </div>
 
-    <div class="row m-4 border border-dark">
-        <div class="col text-center m-3">
-            <table class="table table-striped">
-                <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Super Power</th>
-                    <th>Edit</th>
-                    <th>Delete</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:each="superPower : ${superPowers}">
-                    <td th:text="${superPower.SuperPowerId}">ID</td>
-                    <td th:text="${superPower.SuperPowerName}">SuperPower</td>
-                    <td><a href="#" th:href="@{/editSP(SuperPowerId=${superPower.SuperPowerId})}">Edit</a></td>
-                    <td><a href="#" th:href="@{/deleteSP(SuperPowerId=${superPower.SuperPowerId})}">Delete</a></td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
 </div>
 
 
